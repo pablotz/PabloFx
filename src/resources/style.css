@@ -21,16 +21,13 @@ and open the template in the editor.
     -fx-background-color: -fx-primary;
 }
 
-/* TabPane */
 
-
-
-
-.tab-header-backgroud{
-     -fx-background-color: -fx-primary;
+JFXButton{
+    -fx-background-color: #fff;
+    opacity: .4;
 }
 
-button:hover{
-    -fx-background-color: #FF0000;
+JFXButton:active{
+     -fx-background-color:#FF0000;
+    opacity: .2;
 }
-

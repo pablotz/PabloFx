@@ -27,7 +27,7 @@ public class WindowMain extends Application {
 
 
     public WindowMain() {
-        fxmll = new FXMLLoader(System.class.getResource("/org/glassware/fxml/window_main_1.fxml"));
+        fxmll = new FXMLLoader(System.class.getResource("/org/glassware/fxml/ventana_principal.fxml"));
         fxmll.setController(this);
     }
 
