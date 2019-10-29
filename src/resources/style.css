@@ -23,14 +23,8 @@ and open the template in the editor.
 
 /* TabPane */
 
-.tab{
-    -fx-pref-width: 173;
-    -fx-pref-height: 60;
-    -fx-background-color: #3949ab;
-   
-    
-    
-}
+
+
 
 .tab-header-backgroud{
      -fx-background-color: -fx-primary;
