@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28/10/2019, 06:46:23 PM
+    Author     : pablo
+*/
+
+* {
+    -fx-primary : #c5cae9 ;
+    -fx-secondary : #FFFF8D;
+    -fx-primarytext : #B2B2B2;
+    -fx-blue: #1976D2;
+    -fx-red: #FF0000;
+    -fx-green:#2E7D32;
+}
+
+.root{
+    -fx-background-color: -fx-primary;
+}
+
+/* TabPane */
+
+.tab{
+    -fx-pref-width: 173;
+    -fx-pref-height: 60;
+    -fx-background-color: #3949ab;
+   
+    
+    
+}
+
+.tab-header-backgroud{
+     -fx-background-color: -fx-primary;
+}
+
+button:hover{
+    -fx-background-color: #FF0000;
+}
+
