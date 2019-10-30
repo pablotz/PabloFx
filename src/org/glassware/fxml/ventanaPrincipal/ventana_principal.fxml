@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="1246.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.fxml.ventanaPrincipal.ControladorVentanas">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="1246.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.controller.ControladorVentanas">
    <children>
       <VBox prefHeight="814.0" prefWidth="238.0" style="-fx-background-color: #FFE963;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -37,7 +37,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="btnEmpleados" prefHeight="96.0" prefWidth="284.0" text="Empleados">
+                  <JFXButton fx:id="btnEmpleados" onAction="#cambiarEmpleados" prefHeight="96.0" prefWidth="284.0" text="Empleados">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -46,7 +46,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="btnClientes" prefHeight="105.0" prefWidth="244.0" text="Clientes">
+                  <JFXButton fx:id="btnClientes" onAction="#cambiarClientes" prefHeight="105.0" prefWidth="244.0" text="Clientes">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -55,7 +55,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="btnTratamientos" prefHeight="104.0" prefWidth="358.0" text="Tratamientos">
+                  <JFXButton fx:id="btnTratamientos" onAction="#cambiarTratamientos" prefHeight="104.0" prefWidth="358.0" text="Tratamientos">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -64,7 +64,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="btnSalas" prefHeight="121.0" prefWidth="381.0" text="Salas">
+                  <JFXButton fx:id="btnSalas" onAction="#cambiarSalas" prefHeight="121.0" prefWidth="381.0" text="Salas">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -73,7 +73,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="btnSucursales" prefHeight="116.0" prefWidth="287.0" text="Sucursales">
+                  <JFXButton fx:id="btnSucursales" onAction="#cambiarSucursales" prefHeight="116.0" prefWidth="287.0" text="Sucursales">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -82,7 +82,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="btnControlSala" contentDisplay="CENTER" prefHeight="107.0" prefWidth="289.0" text="Control de sala">
+                  <JFXButton fx:id="btnControlSala" contentDisplay="CENTER" onAction="#cambiarControlSala" prefHeight="107.0" prefWidth="289.0" text="Control de sala">
                      <font>
                         <Font size="20.0" />
                      </font>
