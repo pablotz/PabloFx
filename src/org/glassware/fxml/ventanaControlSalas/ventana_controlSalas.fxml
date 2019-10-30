@@ -93,7 +93,7 @@
       </VBox>
       <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0">
          <children>
-            <Label layoutX="276.0" layoutY="349.0" text="Productos">
+            <Label layoutX="238.0" layoutY="349.0" text="Control Salas">
                <font>
                   <Font name="Bodoni MT" size="96.0" />
                </font>

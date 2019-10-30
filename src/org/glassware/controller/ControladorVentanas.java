@@ -40,33 +40,41 @@ public class ControladorVentanas {
     }
 
     @FXML
-    void cambiarControlSala(ActionEvent event) {
-
-    }
-
-    @FXML
-    void cambiarEmpleados(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/glassware/fxml/ventanaProductos/ventana_productos.fxml"));
+    void cambiarControlSala(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/glassware/fxml/ventanaControlSalas/ventana_controlSalas.fxml"));
         rootPane.getChildren().setAll(pane);
     }
 
     @FXML
-    void cambiarSalas(ActionEvent event) {
+    void cambiarEmpleados(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/glassware/fxml/ventanaEmpleados/ventana_empleado.fxml"));
+        rootPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    void cambiarSalas(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/glassware/fxml/ventanaSalas/ventana_salas.fxml"));
+        rootPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    void cambiarSucursales(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/glassware/fxml/ventanaSucursales/ventana_sucursales.fxml"));
+        rootPane.getChildren().setAll(pane);
 
     }
 
     @FXML
-    void cambiarSucursales(ActionEvent event) {
+    void cambiarTratamientos(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/glassware/fxml/ventanaTratamientos/ventana_tratamientos.fxml"));
+        rootPane.getChildren().setAll(pane);
 
     }
 
     @FXML
-    void cambiarTratamientos(ActionEvent event) {
-
-    }
-    
-     @FXML
-    void cambiarClientes(ActionEvent event) {
+    void cambiarClientes(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/glassware/fxml/ventanaClientes/ventana_clientes.fxml"));
+        rootPane.getChildren().setAll(pane);
 
     }
 
