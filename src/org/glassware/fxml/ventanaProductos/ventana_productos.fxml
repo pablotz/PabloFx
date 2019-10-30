@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="1246.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.fxml.ventanaPrincipal.ControladorVentanas">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="1246.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.fxml.ventanaPrincipal.Ventana_principalController">
    <children>
       <VBox prefHeight="814.0" prefWidth="238.0" style="-fx-background-color: #FFE963;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -28,7 +28,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="btnProductos" onAction="#cambiarProductos" prefHeight="96.0" prefWidth="252.0" ripplerFill="#3b6694" text="Productos">
+                  <JFXButton fx:id="btnProductos" prefHeight="96.0" prefWidth="252.0" ripplerFill="#3b6694" text="Productos">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -93,7 +93,7 @@
       </VBox>
       <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0">
          <children>
-            <Label layoutX="276.0" layoutY="349.0" text="Bienvenido">
+            <Label layoutX="276.0" layoutY="349.0" text="Productos">
                <font>
                   <Font name="Bodoni MT" size="96.0" />
                </font>
