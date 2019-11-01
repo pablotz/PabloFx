@@ -5,34 +5,38 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class ControladorVentanas {
 
     @FXML
-    private AnchorPane rootPane;
+    AnchorPane rootPane;
 
     @FXML
-    private JFXButton btnProductos;
+    JFXButton btnProductos;
 
     @FXML
-    private JFXButton btnEmpleados;
+    JFXButton btnEmpleados;
 
     @FXML
-    private JFXButton btnClientes;
+    JFXButton btnClientes;
 
     @FXML
-    private JFXButton btnTratamientos;
+    JFXButton btnTratamientos;
 
     @FXML
-    private JFXButton btnSalas;
+    JFXButton btnSalas;
 
     @FXML
-    private JFXButton btnSucursales;
+    JFXButton btnSucursales;
 
     @FXML
-    private JFXButton btnControlSala;
+    JFXButton btnControlSala;
 
+    
+    
     @FXML
     private void cambiarProductos(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/org/glassware/fxml/ventanaProductos/ventana_productos.fxml"));

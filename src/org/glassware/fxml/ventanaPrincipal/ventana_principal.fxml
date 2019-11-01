@@ -32,6 +32,13 @@
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <graphic>
+                         <ImageView fitHeight="40.0" fitWidth="40.0">
+                             <image>
+                                 <Image url="@/resources/productos.png" />
+                             </image>
+                         </ImageView>
+                     </graphic>
                   </JFXButton>
                </children>
             </HBox>
