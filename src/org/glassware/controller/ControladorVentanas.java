@@ -81,6 +81,8 @@ public class ControladorVentanas {
         rootPane.getChildren().setAll(pane);
 
     }
+    
+    //Cande
 
 
 }
