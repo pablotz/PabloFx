@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -91,13 +95,57 @@
             </HBox>
          </children>
       </VBox>
-      <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0">
+      <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="238.0" layoutY="349.0" text="Control Salas">
-               <font>
-                  <Font name="Bodoni MT" size="96.0" />
-               </font>
-            </Label>
+            <JFXTabPane prefHeight="814.0" prefWidth="1008.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <tabs>
+                  <Tab text="Sucursal 1">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXButton layoutX="233.0" layoutY="112.0" prefHeight="35.0" prefWidth="111.0" style="-fx-background-color: #FFE963;" text="Conectar" textFill="WHITE" />
+                              <JFXComboBox focusColor="#ffe963" layoutX="30.0" layoutY="112.0" prefHeight="35.0" prefWidth="190.0" promptText="Seleccionar Sala: " unFocusColor="#ffe963" />
+                              <BorderPane layoutX="523.0" layoutY="169.0" prefHeight="500.0" prefWidth="450.0" style="-fx-border-color: #FFE963;" />
+                              <BorderPane layoutX="30.0" layoutY="169.0" prefHeight="500.0" prefWidth="450.0" style="-fx-border-color: #FFE963;">
+                                 <top>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="200.0" text="Temperatura Actual:" textAlignment="CENTER" BorderPane.alignment="TOP_CENTER">
+                                       <BorderPane.margin>
+                                          <Insets top="20.0" />
+                                       </BorderPane.margin>
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </top>
+                                 <center>
+                                    <Label text="0.00 °C" textFill="#ffe963" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="72.0" />
+                                       </font>
+                                    </Label>
+                                 </center>
+                                 <bottom>
+                                    <Label prefHeight="30.0" prefWidth="103.0" text="Desconectado" textAlignment="CENTER" textFill="RED" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </bottom>
+                                 <padding>
+                                    <Insets bottom="50.0" />
+                                 </padding>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Sucursal 2">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
          </children></AnchorPane>
    </children>
 </AnchorPane>
