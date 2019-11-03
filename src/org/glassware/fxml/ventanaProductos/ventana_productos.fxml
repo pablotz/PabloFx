@@ -2,8 +2,12 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -134,18 +138,61 @@
                 </HBox>
             </children>
         </VBox>
-        <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0">
+        <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="0.0">
          <children>
             <JFXTabPane layoutX="216.0" layoutY="161.0" prefHeight="814.0" prefWidth="1008.0" stylesheets="@../../css/Tap.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <tabs>
                   <Tab text="Master-detail">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTreeTableView prefHeight="416.0" prefWidth="681.0" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TreeTableColumn maxWidth="50000.0" prefWidth="289.0" text="Nombre" />
+                                    <TreeTableColumn prefWidth="168.0" text="Marca" />
+                                    <TreeTableColumn prefWidth="95.0" text="Precio" />
+                                    <TreeTableColumn prefWidth="142.0" text="Estatus" />
+                                 </columns>
+                              </JFXTreeTableView>
+                              <AnchorPane layoutX="681.0" prefHeight="757.0" prefWidth="319.0" style="-fx-border-color: #010329;" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label layoutX="134.0" layoutY="31.0" prefHeight="34.0" prefWidth="77.0" text="Detalle">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="33.0" layoutY="138.0" text="Nombre" />
+                                    <JFXTextField layoutX="106.0" layoutY="122.0" prefHeight="31.0" prefWidth="190.0" />
+                                    <Label layoutX="40.0" layoutY="179.0" text="Marca" />
+                                    <JFXTextField layoutX="106.0" layoutY="164.0" prefHeight="31.0" prefWidth="190.0" />
+                                    <Label layoutX="43.0" layoutY="222.0" text="Precio" />
+                                    <JFXTextField layoutX="106.0" layoutY="217.0" prefHeight="31.0" prefWidth="190.0" />
+                                    <JFXButton layoutX="43.0" layoutY="697.0" prefHeight="29.0" prefWidth="110.0" style="-fx-background-color: #010329;" text="Eliminar" textFill="WHITE" />
+                                    <JFXButton layoutX="173.0" layoutY="697.0" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #010329;" text="Modificar" textFill="WHITE" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="1.0" />
+                                 </padding>
+                              </AnchorPane>
+                           </children></AnchorPane>
                     </content>
                   </Tab>
-                  <Tab text="Registar">
+                  <Tab text="Registrar">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../css/Tap.css">
+                           <children>
+                              <Label layoutX="207.0" layoutY="150.0" text="Nombre del producto: " AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="649.0" />
+                              <JFXTextField fx:id="txtNombreProducto" layoutX="207.0" layoutY="171.0" prefHeight="25.0" prefWidth="307.0" AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="494.0" />
+                              <Label layoutX="207.0" layoutY="211.0" text="Marca del producto: " AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="663.0" />
+                              <Label layoutX="207.0" layoutY="280.0" prefHeight="21.0" prefWidth="58.0" text="Precio:" AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="743.0" />
+                              <JFXButton fx:id="btnRegistrarProducto1" layoutX="207.0" layoutY="350.0" prefHeight="39.0" prefWidth="313.0" style="-fx-background-color: #010329;" text="Registrar" textFill="WHITE" AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="488.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXTextField fx:id="txtNombreProducto1" layoutX="206.0" layoutY="232.0" prefHeight="25.0" prefWidth="307.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="494.0" />
+                              <JFXTextField fx:id="txtNombreProducto11" layoutX="206.0" layoutY="301.0" prefHeight="25.0" prefWidth="307.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="494.0" />
+                           </children></AnchorPane>
                     </content>
                   </Tab>
                </tabs>
