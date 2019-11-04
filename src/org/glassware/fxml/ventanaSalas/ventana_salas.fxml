@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -134,13 +135,22 @@
             </children>
         </VBox>
         <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0">
-            <children>
-                <Label layoutX="276.0" layoutY="349.0" text="Salas">
-                    <font>
-                        <Font name="Bodoni MT" size="96.0" />
-                    </font>
-                </Label>
-            </children>
+         <children>
+            <JFXTabPane prefHeight="814.0" prefWidth="1008.0">
+               <tabs>
+                  <Tab text="Salas">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="777.0" prefWidth="997.0" />
+                    </content>
+                  </Tab>
+                  <Tab text="Agregar salas">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
         </AnchorPane>
     </children>
 </AnchorPane>
