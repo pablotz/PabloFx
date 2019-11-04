@@ -16,7 +16,7 @@ import org.glassware.controller.ControladorVentanas;
 public class WindowMain extends Application {
 
     FXMLLoader fxmll;
-    Stage window;
+    public static Stage window;
     Scene scene;
 
     @FXML
@@ -42,11 +42,10 @@ public class WindowMain extends Application {
 
     @FXML
     Button button12;
-    
+
     public static final Image ICONO_SPA = new Image(System.class.getResource("/resources/My Spa.png").toString());
     ControladorVentanas cv = new ControladorVentanas();
-    
-    
+
     public WindowMain() {
         fxmll = new FXMLLoader(System.class.getResource("/org/glassware/fxml/ventanaPrincipal/ventana_principal.fxml"));
     }
@@ -64,9 +63,7 @@ public class WindowMain extends Application {
 
         window.show();
         window.getIcons().add(ICONO_SPA);
-        
-       
-       
+
     }
 
 }
