@@ -146,13 +146,13 @@
                <tabs>
                   <Tab text="Master-detail">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1008.0">
                            <children>
-                              <JFXTreeTableView prefHeight="416.0" prefWidth="681.0" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="0.0">
+                              <JFXTreeTableView layoutY="72.0" prefHeight="697.0" prefWidth="681.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="72.0">
                                  <columns>
-                                    <TreeTableColumn fx:id="ttcNombreCLiente" maxWidth="50000.0" prefWidth="258.3333282470703" text="Nombre" />
-                                    <TreeTableColumn fx:id="ttcApellidoPCliente" prefWidth="161.6666259765625" text="Apellido Paterno" />
-                                    <TreeTableColumn fx:id="ttcApellidoMCliente" prefWidth="132.3333740234375" text="Apellido Materno" />
+                                    <TreeTableColumn fx:id="ttcNombreCLiente" maxWidth="50000.0" prefWidth="202.99998474121094" text="Nombre" />
+                                    <TreeTableColumn fx:id="ttcApellidoPCliente" prefWidth="180.66668701171875" text="Apellido Paterno" />
+                                    <TreeTableColumn fx:id="ttcApellidoMCliente" prefWidth="170.33331298828125" text="Apellido Materno" />
                                     <TreeTableColumn fx:id="ttcRFCCliente" prefWidth="142.0" text="RFC" />
                                  </columns>
                               </JFXTreeTableView>
@@ -192,6 +192,9 @@
                                     <Insets bottom="1.0" />
                                  </padding>
                               </AnchorPane>
+                              <Label layoutX="146.0" layoutY="23.0" text="Buscar: " />
+                              <JFXTextField fx:id="txtBuscarCliente" layoutX="203.0" layoutY="15.0" prefHeight="25.0" prefWidth="163.0" />
+                              <JFXButton fx:id="btnBuscarCliente" layoutX="426.0" layoutY="19.0" text="Buscar" />
                            </children>
                         </AnchorPane>
                      </content>

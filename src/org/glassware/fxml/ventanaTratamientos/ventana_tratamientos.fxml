@@ -147,7 +147,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <JFXTreeTableView prefHeight="416.0" prefWidth="681.0" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="0.0">
+                              <JFXTreeTableView layoutY="67.0" prefHeight="708.0" prefWidth="681.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="67.0">
                                  <columns>
                                     <TreeTableColumn fx:id="ttcNombreCLiente" maxWidth="50000.0" prefWidth="179.0" text="Nombre del tratamiento" />
                                     <TreeTableColumn fx:id="ttcApellidoPCliente" prefWidth="446.0" text="Descripcion del tratamiento" />
@@ -176,6 +176,9 @@
                                     <Insets bottom="1.0" />
                                  </padding>
                               </AnchorPane>
+                              <Label layoutX="128.0" layoutY="26.0" text="Buscar: " />
+                              <JFXTextField fx:id="txtBuscarTratamiento" layoutX="210.0" layoutY="15.0" prefHeight="25.0" prefWidth="163.0" />
+                              <JFXButton fx:id="btnBuscarCliente" layoutX="418.0" layoutY="20.0" text="Buscar" />
                            </children>
                         </AnchorPane>
                      </content>
