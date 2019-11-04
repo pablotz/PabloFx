@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="1246.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.controller.ControladorVentanas">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="1246.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.controller.ControladorVentanas">
     <children>
         <VBox prefHeight="814.0" prefWidth="238.0" style="-fx-background-color: #FFE963;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -133,14 +139,65 @@
                 </HBox>
             </children>
         </VBox>
-        <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0">
-            <children>
-                <Label layoutX="276.0" layoutY="349.0" text="Tratamientos">
-                    <font>
-                        <Font name="Bodoni MT" size="96.0" />
-                    </font>
-                </Label>
-            </children>
-        </AnchorPane>
+      <AnchorPane layoutX="258.0" layoutY="20.0" prefHeight="814.0" prefWidth="1008.0">
+         <children>
+            <JFXTabPane layoutX="216.0" layoutY="161.0" prefHeight="814.0" prefWidth="1008.0" stylesheets="@../../../../../../../../Downloads/Proyecto_gil/Proyecto_gil/Proyecto%20gil/src/css/Tap.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <tabs>
+                  <Tab text="Master-detail">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTreeTableView prefHeight="416.0" prefWidth="681.0" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TreeTableColumn fx:id="ttcNombreCLiente" maxWidth="50000.0" prefWidth="179.0" text="Nombre del tratamiento" />
+                                    <TreeTableColumn fx:id="ttcApellidoPCliente" prefWidth="446.0" text="Descripcion del tratamiento" />
+                                    <TreeTableColumn fx:id="ttcRFCCliente" prefWidth="55.0" text="Costo" />
+                                 </columns>
+                              </JFXTreeTableView>
+                              <AnchorPane layoutX="681.0" prefHeight="757.0" prefWidth="319.0" style="-fx-border-color: #010329;" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label layoutX="134.0" layoutY="31.0" prefHeight="34.0" prefWidth="77.0" text="Detalle">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="-2.0" layoutY="138.0" text="Nombre tratamiento" />
+                                    <JFXTextField fx:id="txtNombreCliente" layoutX="106.0" layoutY="122.0" prefHeight="31.0" prefWidth="190.0" />
+                                    <Label layoutX="13.0" layoutY="182.0" text="Descripción" />
+                                    <Label layoutX="26.0" layoutY="493.0" text="Costo" />
+                                    <JFXTextField fx:id="txtCostoTratamiento" layoutX="98.0" layoutY="477.0" prefHeight="31.0" prefWidth="190.0" />
+                                    <JFXButton fx:id="btnEliminarCliente" layoutX="43.0" layoutY="697.0" prefHeight="29.0" prefWidth="110.0" style="-fx-background-color: #010329;" text="Eliminar" textFill="WHITE" />
+                                    <JFXButton fx:id="btnModificarCliente" layoutX="173.0" layoutY="697.0" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #010329;" text="Modificar" textFill="WHITE" />
+                                    <Label layoutX="23.0" layoutY="539.0" text="Estatus" />
+                                    <JFXTextField fx:id="txtEstatusTratamiento" layoutX="96.0" layoutY="523.0" prefHeight="31.0" prefWidth="190.0" />
+                                    <JFXTextArea fx:id="txaDescripcionTratamiento" layoutX="17.0" layoutY="207.0" prefHeight="261.0" prefWidth="280.0" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="1.0" />
+                                 </padding>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Registrar">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../../../../../../../Downloads/Proyecto_gil/Proyecto_gil/Proyecto%20gil/src/css/Tap.css">
+                           <children>
+                              <Label layoutX="91.0" layoutY="96.0" text="Nombre del tratamiento:" />
+                              <Label layoutX="92.0" layoutY="200.0" text="Descripción del tratamiento: " />
+                              <Label layoutX="91.0" layoutY="524.0" text="Costo del tratamiento por persona:" />
+                              <JFXTextField fx:id="txtNombreTratamiento" layoutX="241.0" layoutY="85.0" prefHeight="25.0" prefWidth="297.0" />
+                              <JFXTextArea fx:id="txaDescripcionTratamiento" layoutX="83.0" layoutY="231.0" prefHeight="239.0" prefWidth="733.0" />
+                              <JFXTextField fx:id="txtCostoTratamiento" layoutX="310.0" layoutY="514.0" prefHeight="25.0" prefWidth="297.0" />
+                              <JFXButton fx:id="btnRegistrarTratamiento" layoutX="480.0" layoutY="628.0" prefHeight="0.0" prefWidth="64.0" text="Registrar" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>
