@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="1246.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.controller.ControladorVentanas">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="1246.0" stylesheets="@../../css/Tap.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.controller.ControladorVentanas">
     <children>
         <VBox prefHeight="814.0" prefWidth="238.0" style="-fx-background-color: #FFE963;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -213,23 +213,40 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="172.0" layoutY="24.0" text="Foto">
+                              <Label layoutX="183.0" layoutY="138.0" prefHeight="47.0" prefWidth="68.0" text="Foto">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="465.0" layoutY="39.0" text="Nombre:">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="42.0" layoutY="401.0" text="Nombre:">
+                              <ImageView fx:id="imgvFoto" fitHeight="296.0" fitWidth="347.0" layoutX="43.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" />
+                              <JFXButton fx:id="btnSelectFoto" layoutX="118.0" layoutY="600.0" onAction="#seleccionarFoto" prefHeight="75.0" prefWidth="179.0" text="Seleccionar foto">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font></JFXButton>
+                              <Label layoutX="465.0" layoutY="108.0" text="Descripción:">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <ImageView fx:id="imgvFoto" fitHeight="249.0" fitWidth="300.0" layoutX="42.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" />
-                              <JFXButton fx:id="btnSelectFoto" layoutX="118.0" layoutY="325.0" onAction="#seleccionarFoto" prefHeight="47.0" prefWidth="149.0" text="Seleccionar foto" />
-                              <Label layoutX="40.0" layoutY="447.0" text="Nombre:">
+                              <Label layoutX="471.0" layoutY="421.0" text="Estatus:">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
+                              <Label layoutX="465.0" layoutY="516.0" text="Sucursal:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField layoutX="566.0" layoutY="29.0" prefHeight="34.0" prefWidth="198.0" />
+                              <JFXTextArea layoutX="465.0" layoutY="146.0" prefHeight="214.0" prefWidth="460.0" />
+                              <JFXTextField layoutX="557.0" layoutY="406.0" prefHeight="34.0" prefWidth="198.0" />
+                              <JFXTextField layoutX="557.0" layoutY="512.0" prefHeight="34.0" prefWidth="198.0" />
                            </children></AnchorPane>
                     </content>
                   </Tab>
