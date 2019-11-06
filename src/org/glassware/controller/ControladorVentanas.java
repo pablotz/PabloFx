@@ -93,6 +93,8 @@ public class ControladorVentanas {
         rootPane.getChildren().setAll(pane);
 
     }
+    
+    //Cande
 
 //Pablo Ventanas
     @FXML
