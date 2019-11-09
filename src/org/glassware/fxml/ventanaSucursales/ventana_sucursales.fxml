@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -133,14 +138,102 @@
                 </HBox>
             </children>
         </VBox>
-        <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0">
-            <children>
-                <Label layoutX="276.0" layoutY="349.0" text="Sucursales">
-                    <font>
-                        <Font name="Bodoni MT" size="96.0" />
-                    </font>
-                </Label>
-            </children>
-        </AnchorPane>
+      <AnchorPane layoutX="237.0" layoutY="1.0" prefHeight="823.0" prefWidth="1019.0">
+         <children>
+            <JFXTabPane prefHeight="814.0" prefWidth="1009.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <tabs>
+                  <Tab text="Sucursales">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="777.0" prefWidth="997.0">
+                           <children>
+                              <JFXTreeTableView layoutY="85.0" prefHeight="696.0" prefWidth="468.0">
+                                 <columns>
+                                    <TreeTableColumn prefWidth="75.0" text="Nombre" />
+                                    <TreeTableColumn prefWidth="75.0" text="Domicilio" />
+                                    <TreeTableColumn prefWidth="75.0" text="Latitud" />
+                                    <TreeTableColumn prefWidth="75.0" text="Loingitud" />
+                                    <TreeTableColumn prefWidth="75.0" text="Estatus" />
+                                 </columns>
+                              </JFXTreeTableView>
+                              <AnchorPane layoutX="467.0" prefHeight="782.0" prefWidth="542.0" style="-fx-border-color: black;">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="54.0" layoutY="98.0" prefHeight="49.0" prefWidth="84.0" text="Nombre:">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="54.0" layoutY="163.0" prefHeight="36.0" prefWidth="95.0" text="Domicilio:">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="200.0" layoutY="8.0" prefHeight="49.0" prefWidth="143.0" text="Detalle">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="59.0" layoutY="235.0" prefHeight="33.0" prefWidth="74.0" text="Estatus:">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="59.0" layoutY="294.0" prefHeight="49.0" prefWidth="84.0" text="Sucursal:">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXTextField layoutX="187.0" layoutY="105.0" prefHeight="34.0" prefWidth="190.0" />
+                                    <JFXTextField layoutX="187.0" layoutY="228.0" prefHeight="31.0" prefWidth="190.0" />
+                                    <JFXTextField layoutX="186.0" layoutY="294.0" prefHeight="31.0" prefWidth="190.0" />
+                                    <JFXTextField layoutX="187.0" layoutY="158.0" prefHeight="34.0" prefWidth="190.0" />
+                                 </children>
+                              </AnchorPane>
+                              <Label layoutX="83.0" layoutY="34.0" text="Buscar:">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField layoutX="153.0" layoutY="35.0" />
+                              <JFXButton layoutX="317.0" layoutY="35.0" text="Buscar" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Agregar Sucursales">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="42.0" layoutY="42.0" text="Nombre:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="42.0" layoutY="111.0" text="Domicilio:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="50.0" layoutY="186.0" prefHeight="30.0" prefWidth="73.0" text="Latitud:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="44.0" layoutY="248.0" text="Longitud:">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField layoutX="143.0" layoutY="32.0" prefHeight="34.0" prefWidth="198.0" />
+                              <JFXTextField layoutX="143.0" layoutY="182.0" prefHeight="34.0" prefWidth="198.0" />
+                              <JFXTextField layoutX="143.0" layoutY="246.0" prefHeight="34.0" prefWidth="198.0" />
+                              <JFXTextField layoutX="143.0" layoutY="107.0" prefHeight="34.0" prefWidth="198.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>
