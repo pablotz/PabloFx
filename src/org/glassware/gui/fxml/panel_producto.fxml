@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1193.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+   <children>
+      <JFXTabPane layoutX="226.0" layoutY="30.0" prefHeight="690.0" prefWidth="1193.0" stylesheets="@../../../../resources/Tap.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+         <tabs>
+            <Tab text="Producto">
+               <content>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="774.0" prefWidth="997.0">
+                     <children>
+                        <Label layoutX="215.0" layoutY="31.0" text="Buscar: ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="txtBuscarCliente" layoutX="284.0" layoutY="32.0" prefHeight="25.0" prefWidth="163.0" />
+                        <JFXButton id="buttonAccion" fx:id="btnBuscarCliente" layoutX="470.0" layoutY="21.0" prefHeight="32.0" prefWidth="104.0" text="Buscar" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../resources/iconos/search.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <TableView layoutX="84.0" layoutY="101.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="84.0">
+                           <columns>
+                              <TableColumn prefWidth="209.00003051757812" text="Nombre " />
+                              <TableColumn minWidth="0.0" prefWidth="192.0" text="Marca" />
+                              <TableColumn prefWidth="185.0" text="Precio" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Registrar Producto">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../../../resources/Tap.css">
+                     <children>
+                        <AnchorPane layoutY="-2.0" prefHeight="640.0" prefWidth="1193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="258.0" layoutY="211.0" text="Nombre del producto:">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="txtNombreProducto" layoutX="515.0" layoutY="209.0" prefHeight="36.0" prefWidth="250.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField fx:id="txtmarcaProducto" layoutX="513.0" layoutY="273.0" prefHeight="25.0" prefWidth="253.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Label layoutX="417.0" layoutY="275.0" text="Marca: ">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="430.0" layoutY="343.0" text="Precio:">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="txtprecio" layoutX="513.0" layoutY="341.0" prefHeight="23.0" prefWidth="253.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXButton id="buttonAccion" fx:id="btnRegistrarCliente" layoutX="914.0" layoutY="364.0" prefHeight="32.0" prefWidth="112.0" text="Registrar" textFill="WHITE" AnchorPane.leftAnchor="919.0" />
+                              <JFXButton id="buttonModificar" layoutX="917.0" layoutY="222.0" prefHeight="31.0" prefWidth="107.0" text="Modificar" textFill="WHITE" AnchorPane.leftAnchor="919.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../resources/iconos/re.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton id="buttonGuardar" layoutX="915.0" layoutY="277.0" prefHeight="29.0" prefWidth="110.0" text="Guardar" textFill="WHITE" AnchorPane.leftAnchor="919.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../resources/iconos/save.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton id="buttonEliminar" layoutX="916.0" layoutY="321.0" prefHeight="29.0" prefWidth="110.0" text="Eliminar" textFill="WHITE" AnchorPane.leftAnchor="919.0">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../resources/iconos/trash.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <HBox alignment="CENTER_RIGHT" layoutX="211.0" layoutY="24.0" prefHeight="40.0" prefWidth="200.0" stylesheets="@../../../../resources/Tap.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton id="buttonEliminar" fx:id="btnCerrarModulo" maxHeight="1.7976931348623157E308" prefWidth="32.0" text="X" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="4.0" right="4.0" top="4.0" />
+               </HBox.margin>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

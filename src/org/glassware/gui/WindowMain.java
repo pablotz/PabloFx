@@ -51,6 +51,8 @@ public class WindowMain extends Application {
     
     
     PanelCliente panelCliente;
+    PanelProducto panelProducto;
+    PanelEmpleado panelEmpleado;
 
     public static final Image ICONO_SPA = new Image(System.class.getResource("/resources/My Spa.png").toString());
     ControladorVentanas cv = new ControladorVentanas();
@@ -63,16 +65,16 @@ public class WindowMain extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         
-        
         fxmll.load();
 
         scene = new Scene(fxmll.getRoot());
-        
         panelCliente = new PanelCliente(this);
         panelCliente.inicializar();
-        
-        btnClientes.setOnAction(evt -> {pnlContenedorPrincipal.setCenter(panelCliente.getRoot());});
-
+        panelProducto = new PanelProducto(this);
+        panelProducto.inicializar();
+        panelEmpleado = new PanelEmpleado(this);
+        panelEmpleado.inicializar();
+        agregarOyentes();
         window = primaryStage;
 
         window.setScene(scene);
@@ -86,7 +88,13 @@ public class WindowMain extends Application {
         window.setTitle("MySpa");
 
     }
-    
+    public void agregarOyentes(){
+        btnClientes.setOnAction(evt -> {pnlContenedorPrincipal.setCenter(panelCliente.getRoot());});
+        btnProductos.setOnAction(evt -> {pnlContenedorPrincipal.setCenter(panelProducto.getRoot());} );
+        btnEmpleados.setOnAction(evt -> {pnlContenedorPrincipal.setCenter(panelEmpleado.getRoot());});
+        
+        
+    }
     public void cerrarModulo()
     {
         pnlContenedorPrincipal.setCenter(pnlInicio);
