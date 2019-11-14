@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="1246.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.controller.ControladorVentanas">
+<AnchorPane fx:id="rootPane" minHeight="600" minWidth="800" prefHeight="720" prefWidth="1280" stylesheets="@../../../../resources/Tap.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.controller.ControladorVentanas">
     <children>
         <VBox prefHeight="814.0" prefWidth="238.0" style="-fx-background-color: #FFE963;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -139,45 +139,68 @@
                 </HBox>
             </children>
         </VBox>
-        <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="0.0">
+        <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0" stylesheets="@../../../../resources/Tap.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <JFXTabPane prefHeight="814.0" prefWidth="1008.0" stylesheets="@../../css/Tap.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <JFXTabPane prefHeight="814.0" prefWidth="1008.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
-                        <Tab text="Master-detail">
+                        <Tab text="Empleados">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="1042.0">
                                     <children>
-                                        <JFXTreeTableView prefHeight="416.0" prefWidth="698.0" AnchorPane.bottomAnchor="342.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="0.0">
+                                        <JFXTreeTableView layoutY="90.0" prefHeight="591.0" prefWidth="715.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="90.0">
                                             <columns>
-                                                <TreeTableColumn prefWidth="104.0" text="Foto" />
-                                                <TreeTableColumn maxWidth="50000.0" prefWidth="109.0" text="No. Empleado" />
-                                                <TreeTableColumn maxWidth="50000.0" prefWidth="144.0" text="Nombre" />
-                                                <TreeTableColumn maxWidth="50000.0" prefWidth="45.0" text="RFC" />
-                                                <TreeTableColumn maxWidth="50000.0" prefWidth="115.0" text="Domicilio" />
-                                                <TreeTableColumn maxWidth="50000.0" prefWidth="76.0" text="Telefono" />
-                                                <TreeTableColumn maxWidth="50000.0" prefWidth="104.0" text="Puesto" />
+                                                <TreeTableColumn maxWidth="50000.0" prefWidth="93.0" text="No. Empleado" />
+                                                <TreeTableColumn maxWidth="50000.0" prefWidth="151.0" text="Nombre" />
+                                                <TreeTableColumn maxWidth="50000.0" prefWidth="132.0" text="RFC" />
+                                                <TreeTableColumn maxWidth="50000.0" prefWidth="127.0" text="Domicilio" />
+                                                <TreeTableColumn maxWidth="50000.0" prefWidth="128.0" text="Telefono" />
+                                                <TreeTableColumn maxWidth="50000.0" prefWidth="83.0" text="Puesto" />
                                             </columns>
                                         </JFXTreeTableView>
-                                        <AnchorPane layoutX="690.0" layoutY="1.0" prefHeight="757.0" prefWidth="298.0" style="-fx-border-color: #010329;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="1.0">
+                                        <AnchorPane layoutX="690.0" layoutY="-7.0" prefHeight="685.0" prefWidth="330.0" style="-fx-border-color: #010329;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-7.0">
                                             <children>
-                                                <Label layoutX="111.0" layoutY="14.0" prefHeight="34.0" prefWidth="77.0" text="Detalle">
+                                                <Label layoutX="111.0" layoutY="14.0" prefHeight="36.0" prefWidth="93.0" text="Detalle">
                                                     <font>
-                                                        <Font size="19.0" />
+                                                        <Font name="System Bold" size="25.0" />
                                                     </font>
                                                 </Label>
-                                                <Label layoutX="13.0" layoutY="458.0" text="Telefono" />
-                                                <JFXTextField layoutX="122.0" layoutY="202.0" prefHeight="31.0" prefWidth="164.0" />
-                                                <Label layoutX="6.0" layoutY="253.0" text="Nombre" />
-                                                <Label layoutX="6.0" layoutY="210.0" prefHeight="31.0" prefWidth="106.0" text="No. Empleado" />
-                                                <JFXButton layoutX="43.0" layoutY="697.0" prefHeight="29.0" prefWidth="110.0" style="-fx-background-color: #010329;" text="Eliminar" textFill="WHITE" />
-                                                <JFXButton layoutX="173.0" layoutY="697.0" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #010329;" text="Modificar" textFill="WHITE" />
-                                                <Label layoutX="12.0" layoutY="426.0" text="Domicilio" />
-                                                <Label layoutX="16.0" layoutY="390.0" text="RFC" />
-                                                <Label layoutX="2.0" layoutY="290.0" text="Apellido materno" />
-                                                <Label layoutX="6.0" layoutY="321.0" text="Apellido Paterno" />
-                                                <Label layoutX="9.0" layoutY="358.0" text="Genero" />
-                                                <Label layoutX="21.0" layoutY="493.0" text="Puesto" />
-                                                <Label layoutX="128.0" layoutY="89.0" text="Foto" />
+                                                <Label layoutX="10.0" layoutY="458.0" text="Teléfono">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font></Label>
+                                                <JFXTextField layoutX="129.0" layoutY="202.0" prefHeight="31.0" prefWidth="157.0" />
+                                                <Label layoutX="12.0" layoutY="253.0" text="Nombre">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></Label>
+                                                <Label layoutX="13.0" layoutY="210.0" prefHeight="31.0" prefWidth="117.0" text="No. Empleado">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></Label>
+                                                <Label layoutX="11.0" layoutY="426.0" text="Domicilio">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></Label>
+                                                <Label layoutX="11.0" layoutY="390.0" text="RFC">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></Label>
+                                                <Label layoutX="11.0" layoutY="290.0" text="Ape. Materno">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></Label>
+                                                <Label layoutX="10.0" layoutY="322.0" text="Ape. Paterno">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></Label>
+                                                <Label layoutX="9.0" layoutY="359.0" text="Género">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></Label>
+                                                <Label layoutX="11.0" layoutY="493.0" text="Puesto">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font></Label>
                                                 <JFXTextField layoutX="122.0" layoutY="238.0" prefHeight="31.0" prefWidth="164.0" />
                                                 <JFXTextField layoutX="122.0" layoutY="274.0" prefHeight="31.0" prefWidth="164.0" />
                                                 <JFXTextField layoutX="122.0" layoutY="306.0" prefHeight="31.0" prefWidth="164.0" />
@@ -186,41 +209,115 @@
                                                 <JFXTextField layoutX="122.0" layoutY="405.0" prefHeight="31.0" prefWidth="164.0" />
                                                 <JFXTextField layoutX="122.0" layoutY="437.0" prefHeight="31.0" prefWidth="164.0" />
                                                 <JFXTextField layoutX="122.0" layoutY="488.0" prefHeight="31.0" prefWidth="164.0" />
+                                    <ImageView fitHeight="130.0" fitWidth="126.0" layoutX="94.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../resources/iconos/student.png" />
+                                       </image>
+                                    </ImageView>
+                                    <AnchorPane layoutX="4.0" layoutY="297.0" prefHeight="335.0" prefWidth="283.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="47.0">
+                                       <children>
+                                          <JFXButton id="buttonGuardar" layoutX="40.0" layoutY="340.0" prefHeight="29.0" prefWidth="110.0" text="Guardar" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../resources/iconos/save.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></JFXButton>
+                                    <JFXButton id="buttonEliminar" layoutX="40.0" layoutY="291.0" prefHeight="29.0" prefWidth="110.0" text="Eliminar" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../resources/iconos/trash.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></JFXButton>
+                                    <JFXButton id="buttonModificar" layoutX="176.0" layoutY="290.0" prefHeight="31.0" prefWidth="107.0" text="Modificar" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../resources/iconos/re.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></JFXButton>
+                                       </children>
+                                    </AnchorPane>
                                             </children>
                                             <padding>
                                                 <Insets bottom="1.0" />
                                             </padding>
                                         </AnchorPane>
+                              <Label layoutX="228.0" layoutY="29.0" text="Buscar: ">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="txtBuscarCliente" layoutX="296.0" layoutY="30.0" prefHeight="25.0" prefWidth="163.0" />
+                              <JFXButton id="buttonAccion" fx:id="btnBuscarEmpleado" layoutX="470.0" layoutY="21.0" prefHeight="32.0" prefWidth="104.0" text="Buscar" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../resources/iconos/search.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></JFXButton>
                                     </children>
                                 </AnchorPane>
                             </content>
                         </Tab>
-                        <Tab text="Registrar">
+                        <Tab text="Registrar empleado">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../../css/Tap.css">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <JFXButton fx:id="btnRegistrarProducto1" layoutX="158.0" layoutY="447.0" prefHeight="39.0" prefWidth="639.0" style="-fx-background-color: #010329;" text="Registrar" textFill="WHITE" AnchorPane.leftAnchor="158.0" AnchorPane.rightAnchor="211.0">
+                                        <JFXButton id="buttonAccion" fx:id="btnRegistrarProducto1" layoutX="158.0" layoutY="447.0" prefHeight="39.0" prefWidth="639.0" text="Registrar" textFill="WHITE" AnchorPane.leftAnchor="158.0" AnchorPane.rightAnchor="211.0">
                                             <font>
                                                 <Font size="18.0" />
                                             </font>
                                         </JFXButton>
-                                        <Label layoutX="191.0" layoutY="358.0" text="Telefono:" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="755.0" />
-                                        <Label layoutX="189.0" layoutY="153.0" prefHeight="21.0" prefWidth="62.0" text="Nombre:" AnchorPane.leftAnchor="189.0" />
-                                        <Label layoutX="544.0" layoutY="285.0" text="Domicilio:" AnchorPane.leftAnchor="544.0" AnchorPane.rightAnchor="398.0" />
-                                        <Label layoutX="575.0" layoutY="358.0" text="RFC:" AnchorPane.leftAnchor="575.0" AnchorPane.rightAnchor="404.0" />
-                                        <Label layoutX="500.0" layoutY="225.0" text="Apellido materno:" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="389.0" />
-                                        <Label layoutX="143.0" layoutY="225.0" text="Apellido Paterno:" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="751.0" />
-                                        <Label layoutX="550.0" layoutY="153.0" text="Genero" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="409.0" />
-                                        <Label layoutX="198.0" layoutY="285.0" text="Puesto:" AnchorPane.leftAnchor="198.0" AnchorPane.rightAnchor="761.0" />
-                                        <Label layoutX="544.0" layoutY="40.0" text="Foto" />
-                                        <JFXComboBox layoutX="628.0" layoutY="138.0" prefHeight="31.0" prefWidth="155.0" AnchorPane.leftAnchor="628.0" />
+                                        <Label layoutX="136.0" layoutY="351.0" prefHeight="36.0" prefWidth="115.0" text="Teléfono:" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="791.0">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font></Label>
+                                        <Label layoutX="159.0" layoutY="148.0" prefHeight="36.0" prefWidth="103.0" text="Nombre:" AnchorPane.leftAnchor="159.0">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font></Label>
+                                        <Label layoutX="514.0" layoutY="280.0" prefHeight="36.0" prefWidth="117.0" text="Domicilio:" AnchorPane.leftAnchor="514.0" AnchorPane.rightAnchor="411.0">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font></Label>
+                                        <Label layoutX="545.0" layoutY="353.0" text="RFC:" AnchorPane.leftAnchor="545.0" AnchorPane.rightAnchor="434.0">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font></Label>
+                                        <Label layoutX="467.0" layoutY="218.0" prefHeight="36.0" prefWidth="164.0" text="Ape. Materno:" AnchorPane.leftAnchor="467.0" AnchorPane.rightAnchor="411.0">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font></Label>
+                                        <Label layoutX="101.0" layoutY="218.0" prefHeight="36.0" prefWidth="164.0" text="Ape. Paterno:" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="777.0">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font></Label>
+                                        <Label layoutX="520.0" layoutY="148.0" text="Género" AnchorPane.leftAnchor="520.0" AnchorPane.rightAnchor="439.0">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font></Label>
+                                        <Label layoutX="168.0" layoutY="280.0" text="Puesto:" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="791.0">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font></Label>
+                                        <Label layoutX="544.0" layoutY="40.0" text="Foto">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font></Label>
+                                        <JFXComboBox layoutX="628.0" layoutY="138.0" prefHeight="31.0" prefWidth="164.0" AnchorPane.leftAnchor="628.0" />
                                         <JFXTextField layoutX="265.0" layoutY="148.0" prefHeight="31.0" prefWidth="178.0" AnchorPane.leftAnchor="265.0" />
                                         <JFXTextField layoutX="265.0" layoutY="220.0" prefHeight="31.0" prefWidth="178.0" AnchorPane.leftAnchor="265.0" />
                                         <JFXTextField layoutX="265.0" layoutY="280.0" prefHeight="31.0" prefWidth="179.0" AnchorPane.leftAnchor="265.0" />
                                         <JFXTextField layoutX="254.0" layoutY="353.0" prefHeight="31.0" prefWidth="191.0" AnchorPane.leftAnchor="254.0" />
-                                        <JFXTextField layoutX="633.0" layoutY="220.0" prefHeight="31.0" prefWidth="164.0" AnchorPane.leftAnchor="633.0" />
-                                        <JFXTextField layoutX="623.0" layoutY="280.0" prefHeight="31.0" prefWidth="164.0" AnchorPane.leftAnchor="623.0" />
-                                        <JFXTextField layoutX="623.0" layoutY="343.0" prefHeight="31.0" prefWidth="164.0" AnchorPane.leftAnchor="623.0" />
+                                        <JFXTextField layoutX="631.0" layoutY="223.0" prefHeight="31.0" prefWidth="164.0" AnchorPane.leftAnchor="631.0" />
+                                        <JFXTextField layoutX="631.0" layoutY="280.0" prefHeight="31.0" prefWidth="164.0" AnchorPane.leftAnchor="631.0" />
+                                        <JFXTextField layoutX="623.0" layoutY="343.0" prefHeight="31.0" prefWidth="175.0" AnchorPane.leftAnchor="623.0" />
                                     </children>
                                 </AnchorPane>
                             </content>

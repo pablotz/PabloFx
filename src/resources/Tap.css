@@ -10,10 +10,27 @@ and open the template in the editor.
 
 .tab{
     -fx-pref-height:40;
+    -fx-pref-width: 515; 
 }
 .tab-header-background{
-    -fx-background-color:#010329;
+    -fx-background-color:   #010329;
 }
 .jfx-tab-pane .tab-selected-line{
     -fx-border-color:  #FFE963;
+}
+
+#buttonAccion{
+    -fx-background-color:  #010329;
+}
+
+#buttonGuardar{
+    -fx-background-color:  #28a745;
+}
+
+#buttonEliminar{
+    -fx-background-color:  #dc3545;
+}
+
+#buttonModificar{
+    -fx-background-color:  #ffc107;
 }
