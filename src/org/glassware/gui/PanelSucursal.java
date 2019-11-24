@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -20,17 +21,20 @@ public class PanelSucursal {
     JFXButton btnCerrarModulo;
     WindowMain app;
 
+    @FXML
+    AnchorPane rootPane;
+
     FXMLLoader fxmll;
 
     public PanelSucursal(WindowMain app) {
         this.app = app;
-        fxmll = new FXMLLoader(System.class.getResource("/org/glassware/gui/fxml/panel_sucursal.fxml"));
-        fxmll.setController(this);
     }
 
     public void inicializar() throws Exception {
+        fxmll = new FXMLLoader(System.class.getResource("/org/glassware/gui/fxml/panel_sucursal.fxml"));
+        fxmll.setController(this);
         fxmll.load();
-
+        
         btnCerrarModulo.setOnAction(evt -> {
             app.cerrarModulo();
         });
@@ -38,6 +42,10 @@ public class PanelSucursal {
 
     public Node getRoot() {
         return fxmll.getRoot();
+    }
+    
+    public AnchorPane getRooPane(){
+        return rootPane;
     }
 
 }

@@ -2,14 +2,12 @@ package org.glassware.gui;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -72,6 +70,21 @@ public class WindowMain extends Application {
         fxmll.load();
 
         scene = new Scene(fxmll.getRoot());
+        agregarOyentes();
+        window = primaryStage;
+
+        window.setScene(scene);
+
+        window.setMinHeight(768);
+        window.setMinWidth(1300);
+        inicializarComponentes();
+        window.show();
+        window.getIcons().add(ICONO_SPA);
+        window.setTitle("MySpa");
+
+    }
+    
+    private void inicializarComponentes() throws Exception{
         panelCliente = new PanelCliente(this);
         panelCliente.inicializar();
         panelProducto = new PanelProducto(this);
@@ -86,18 +99,7 @@ public class WindowMain extends Application {
         panelControlSala.inicializar();
         panelTratamiento = new PanelTratamientos(this);
         panelTratamiento.inicializar();
-        agregarOyentes();
-        window = primaryStage;
-
-        window.setScene(scene);
-
-        window.setMinHeight(768);
-        window.setMinWidth(1300);
-
-        window.show();
-        window.getIcons().add(ICONO_SPA);
-        window.setTitle("MySpa");
-
+        
     }
 
     public void agregarOyentes() {
@@ -127,5 +129,6 @@ public class WindowMain extends Application {
     public void cerrarModulo() {
         pnlContenedorPrincipal.setCenter(pnlInicio);
     }
+ 
 
 }
