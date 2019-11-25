@@ -6,11 +6,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="814.0" prefWidth="1246.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.controller.ControladorVentanas">
+<AnchorPane fx:id="rootPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../../resources/Tap.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.glassware.controller.ControladorVentanas">
     <children>
         <VBox prefHeight="814.0" prefWidth="238.0" style="-fx-background-color: #FFE963;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -133,14 +134,33 @@
                 </HBox>
             </children>
         </VBox>
-        <AnchorPane layoutX="238.0" prefHeight="814.0" prefWidth="1008.0">
-            <children>
-                <Label layoutX="276.0" layoutY="349.0" text="Bienvenido">
-                    <font>
-                        <Font name="Bodoni MT" size="96.0" />
-                    </font>
-                </Label>
-            </children>
-        </AnchorPane>
+      <BorderPane fx:id="pnlContenedorPrincipal" layoutX="238.0" layoutY="14.0" prefHeight="577.0" prefWidth="761.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+              <AnchorPane fx:id="pnlInicio" prefHeight="720.0" prefWidth="741.0" BorderPane.alignment="CENTER">
+                  <children>
+                  <BorderPane layoutX="169.0" layoutY="275.0" prefHeight="387.0" prefWidth="676.0" AnchorPane.bottomAnchor="58.0" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="197.0" AnchorPane.topAnchor="275.0">
+                     <center>
+                        <ImageView fitHeight="381.0" fitWidth="375.0" opacity="0.78" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                           <image>
+                              <Image url="@../../../../resources/My%20Spa.png" />
+                           </image>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                        </ImageView>
+                     </center>
+                  </BorderPane>
+                      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="279.0" layoutY="128.0" text="Bienvenido" textFill="#0e244d" textOverrun="CENTER_ELLIPSIS" AnchorPane.bottomAnchor="445.0" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="307.0" AnchorPane.topAnchor="128.0">
+                          <font>
+                              <Font name="Bodoni MT" size="96.0" />
+                          </font>
+                     <padding>
+                        <Insets top="30.0" />
+                     </padding>
+                      </Label>
+                  </children>
+              </AnchorPane>
+         </center>
+      </BorderPane>
     </children>
 </AnchorPane>

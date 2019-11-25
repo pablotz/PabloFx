@@ -2,22 +2,27 @@ package org.glassware.gui;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.glassware.controller.ControladorVentanas;
 
 public class WindowMain extends Application {
 
     FXMLLoader fxmll;
-    Stage window;
+    public static Stage window;
     Scene scene;
+
+    @FXML
+    AnchorPane pnlInicio;
+    @FXML
+    BorderPane pnlContenedorPrincipal;
 
     @FXML
     JFXButton btnProductos;
@@ -42,13 +47,21 @@ public class WindowMain extends Application {
 
     @FXML
     Button button12;
-    
+
+    PanelCliente panelCliente;
+    PanelProducto panelProducto;
+    PanelEmpleado panelEmpleado;
+    PanelSala panelSala;
+    PanelSucursal panelSucursal;
+    PanelControlSala panelControlSala;
+    PanelTratamientos panelTratamiento;
+
     public static final Image ICONO_SPA = new Image(System.class.getResource("/resources/My Spa.png").toString());
     ControladorVentanas cv = new ControladorVentanas();
-    
-    
+
     public WindowMain() {
-        fxmll = new FXMLLoader(System.class.getResource("/org/glassware/fxml/ventanaPrincipal/ventana_principal.fxml"));
+        fxmll = new FXMLLoader(System.class.getResource("/org/glassware/gui/fxml/window_main.fxml"));
+        fxmll.setController(this);
     }
 
     @Override
@@ -57,16 +70,65 @@ public class WindowMain extends Application {
         fxmll.load();
 
         scene = new Scene(fxmll.getRoot());
-
+        agregarOyentes();
         window = primaryStage;
 
         window.setScene(scene);
 
+        window.setMinHeight(768);
+        window.setMinWidth(1300);
+        inicializarComponentes();
         window.show();
         window.getIcons().add(ICONO_SPA);
-        
-       
-       
+        window.setTitle("MySpa");
+
     }
+    
+    private void inicializarComponentes() throws Exception{
+        panelCliente = new PanelCliente(this);
+        panelCliente.inicializar();
+        panelProducto = new PanelProducto(this);
+        panelProducto.inicializar();
+        panelEmpleado = new PanelEmpleado(this);
+        panelEmpleado.inicializar();
+        panelSala = new PanelSala(this);
+        panelSala.inicializar();
+        panelSucursal = new PanelSucursal(this);
+        panelSucursal.inicializar();
+        panelControlSala = new PanelControlSala(this);
+        panelControlSala.inicializar();
+        panelTratamiento = new PanelTratamientos(this);
+        panelTratamiento.inicializar();
+        
+    }
+
+    public void agregarOyentes() {
+        btnClientes.setOnAction(evt -> {
+            pnlContenedorPrincipal.setCenter(panelCliente.getRoot());
+        });
+        btnProductos.setOnAction(evt -> {
+            pnlContenedorPrincipal.setCenter(panelProducto.getRoot());
+        });
+        btnEmpleados.setOnAction(evt -> {
+            pnlContenedorPrincipal.setCenter(panelEmpleado.getRoot());
+        });
+        btnSalas.setOnAction(evt -> {
+            pnlContenedorPrincipal.setCenter(panelSala.getRoot());
+        });
+        btnSucursales.setOnAction(evt -> {
+            pnlContenedorPrincipal.setCenter(panelSucursal.getRoot());
+        });
+        btnControlSala.setOnAction(evt -> {
+            pnlContenedorPrincipal.setCenter(panelControlSala.getRoot());
+        });
+        btnTratamientos.setOnAction(evt -> {
+            pnlContenedorPrincipal.setCenter(panelTratamiento.getRoot());
+        });
+    }
+
+    public void cerrarModulo() {
+        pnlContenedorPrincipal.setCenter(pnlInicio);
+    }
+ 
 
 }

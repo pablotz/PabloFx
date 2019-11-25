@@ -1,0 +1,36 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 3/11/2019, 01:34:39 PM
+    Author     : ximena Uribe
+*/
+
+.tab{
+    -fx-pref-height:40;
+    -fx-pref-width: 515; 
+}
+.tab-header-background{
+    -fx-background-color:   #010329;
+}
+.jfx-tab-pane .tab-selected-line{
+    -fx-border-color:  #FFE963;
+}
+
+#buttonAccion{
+    -fx-background-color:  #010329;
+}
+
+#buttonGuardar{
+    -fx-background-color:  #28a745;
+}
+
+#buttonEliminar{
+    -fx-background-color:  #dc3545;
+}
+
+#buttonModificar{
+    -fx-background-color:  #ffc107;
+}
