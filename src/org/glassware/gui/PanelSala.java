@@ -51,6 +51,8 @@ public class PanelSala {
     private JFXTextField txtSucursalSala;
 
     FXMLLoader fxmll;
+    
+    
 
     public PanelSala(WindowMain app) {
         this.app = app;
@@ -125,6 +127,8 @@ public class PanelSala {
     public FXMLLoader getFxmll() {
         return fxmll;
     }
+    
+    
     
     
     
