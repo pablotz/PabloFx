@@ -28,8 +28,8 @@
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <JFXTextField fx:id="txtBuscarCliente" layoutX="284.0" layoutY="32.0" prefHeight="25.0" prefWidth="163.0" />
-                                <JFXButton id="buttonAccion" fx:id="btnBuscarCliente" layoutX="470.0" layoutY="21.0" prefHeight="32.0" prefWidth="104.0" text="Buscar" textFill="WHITE">
+                                <JFXTextField fx:id="txtBuscarSala" layoutX="284.0" layoutY="32.0" prefHeight="25.0" prefWidth="163.0" />
+                                <JFXButton id="buttonAccion" fx:id="btnBuscarSala" layoutX="470.0" layoutY="21.0" prefHeight="32.0" prefWidth="104.0" text="Buscar" textFill="WHITE">
                                     <graphic>
                                         <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -40,8 +40,10 @@
                                 </JFXButton>
                         <TableView layoutX="84.0" layoutY="101.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="84.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn prefWidth="75.0" text="Nombre" />
+                            <TableColumn prefWidth="75.0" text="Descripción" />
+                              <TableColumn prefWidth="75.0" text="Estatus" />
+                              <TableColumn prefWidth="75.0" text="Sucursal" />
                           </columns>
                         </TableView>
                             </children>
@@ -54,7 +56,7 @@
                             <children>
                                 <AnchorPane layoutY="-2.0" prefHeight="689.0" prefWidth="1044.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0">
                                     <children>
-                              <JFXButton id="buttonGuardar" layoutX="988.0" layoutY="307.0" prefHeight="29.0" prefWidth="110.0" text="Guardar" textFill="WHITE">
+                              <JFXButton id="buttonGuardar" fx:id="btnGuardarSala" layoutX="971.0" layoutY="298.0" prefHeight="29.0" prefWidth="110.0" text="Guardar" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -63,7 +65,7 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton id="buttonEliminar" layoutX="971.0" layoutY="405.0" prefHeight="29.0" prefWidth="110.0" text="Eliminar" textFill="WHITE">
+                              <JFXButton id="buttonEliminar" fx:id="btnEliminarSala" layoutX="971.0" layoutY="383.0" prefHeight="29.0" prefWidth="110.0" text="Eliminar" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -72,7 +74,7 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton id="buttonModificar" layoutX="972.0" layoutY="208.0" prefHeight="31.0" prefWidth="107.0" text="Modificar" textFill="WHITE">
+                              <JFXButton id="buttonModificar" fx:id="btnModificarSala" layoutX="972.0" layoutY="208.0" prefHeight="31.0" prefWidth="107.0" text="Modificar" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -80,6 +82,11 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                              </JFXButton>
+                              <JFXButton id="buttonAccion" fx:id="btnRegistrarSala" layoutX="972.0" layoutY="472.0" prefHeight="42.0" prefWidth="107.0" text="Registrar" textFill="WHITE">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
                               </JFXButton>
                                     </children>
                                 </AnchorPane>
@@ -93,7 +100,7 @@
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <JFXButton id="buttonAccion" fx:id="btnSelectFoto" layoutX="120.0" layoutY="484.0" prefHeight="29.0" prefWidth="179.0" text="Seleccionar foto" textFill="WHITE">
+                        <JFXButton id="buttonAccion" fx:id="btnSelectFotoSala" layoutX="120.0" layoutY="484.0" prefHeight="29.0" prefWidth="179.0" text="Seleccionar foto" textFill="WHITE">
                            <font>
                               <Font size="19.0" />
                            </font>
@@ -113,10 +120,10 @@
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <JFXTextField layoutX="588.0" layoutY="39.0" prefHeight="34.0" prefWidth="198.0" />
-                        <JFXTextArea layoutX="475.0" layoutY="156.0" prefHeight="214.0" prefWidth="460.0" />
-                        <JFXTextField layoutX="576.0" layoutY="431.0" prefHeight="34.0" prefWidth="99.0" />
-                        <JFXTextField layoutX="576.0" layoutY="526.0" prefHeight="34.0" prefWidth="198.0" />
+                        <JFXTextField fx:id="txtNombreSala" layoutX="588.0" layoutY="39.0" prefHeight="34.0" prefWidth="198.0" />
+                        <JFXTextArea fx:id="txtDescripcionSala" layoutX="475.0" layoutY="156.0" prefHeight="214.0" prefWidth="460.0" />
+                        <JFXTextField fx:id="txtEstatusSala" layoutX="576.0" layoutY="431.0" prefHeight="34.0" prefWidth="99.0" />
+                        <JFXTextField fx:id="txtSucursalSala" layoutX="576.0" layoutY="526.0" prefHeight="34.0" prefWidth="198.0" />
                             </children>
                         </AnchorPane>
                     </content>
