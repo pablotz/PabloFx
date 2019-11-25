@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1193.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="720.0" prefWidth="1193.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXTabPane layoutX="226.0" layoutY="30.0" prefHeight="690.0" prefWidth="1193.0" stylesheets="@../../../../resources/Tap.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <tabs>
@@ -69,8 +69,8 @@
                            </font>
                         </Label>
                         <JFXTextField fx:id="txtNombreTratamiento" layoutX="374.0" layoutY="46.0" prefHeight="25.0" prefWidth="297.0" />
-                        <JFXTextArea fx:id="txaDescripcionTratamiento1" layoutX="84.0" layoutY="204.0" prefHeight="191.0" prefWidth="733.0" />
-                        <JFXTextField fx:id="txtCostoTratamiento1" layoutX="484.0" layoutY="452.0" prefHeight="25.0" prefWidth="146.0" />
+                        <JFXTextArea fx:id="txaDescripcionTratamiento" layoutX="84.0" layoutY="204.0" prefHeight="191.0" prefWidth="733.0" />
+                        <JFXTextField fx:id="txtCostoTratamiento" layoutX="484.0" layoutY="452.0" prefHeight="25.0" prefWidth="146.0" />
                         <JFXButton id="buttonAccion" fx:id="btnRegistrarTratamiento" layoutX="148.0" layoutY="553.0" prefHeight="48.0" prefWidth="774.0" text="Registrar" textFill="WHITE">
                            <font>
                               <Font size="22.0" />
