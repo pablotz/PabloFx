@@ -6,7 +6,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -37,15 +36,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <TableView layoutX="84.0" layoutY="101.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="84.0">
-                           <columns>
-                              <TableColumn prefWidth="209.00003051757812" text="Nombre" />
-                              <TableColumn minWidth="0.0" prefWidth="192.0" text="Domicilio" />
-                              <TableColumn prefWidth="185.0" text="Latitud" />
-                              <TableColumn prefWidth="75.0" text="Longitud" />
-                              <TableColumn prefWidth="75.0" text="Estatus" />
-                           </columns>
-                        </TableView>
+                        <TableView fx:id="tblvSucursales" layoutX="84.0" layoutY="101.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="84.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -84,6 +75,12 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
+                              <Label layoutX="119.0" layoutY="14.0" text="ID:">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="txtIdSucursal" layoutX="171.0" layoutY="6.0" prefHeight="34.0" prefWidth="198.0" />
                            </children>
                         </AnchorPane>
                         <Label layoutX="52.0" layoutY="52.0" text="Nombre:">

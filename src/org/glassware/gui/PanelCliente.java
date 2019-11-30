@@ -16,6 +16,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import org.glassware.model.Persona;
+import org.glassware.model.Usuario;
 
 
 /**

@@ -7,10 +7,16 @@ package org.glassware.gui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import org.glassware.model.Sucursal;
+import org.glassware.task.sucursal.TableAdapterSucursal;
+import org.glassware.task.sucursal.TaskSucursalGetAll;
 
 /**
  *
@@ -55,20 +61,18 @@ public class PanelSucursal {
     @FXML
     private JFXTextField txtDomicilioSucursal;
 
+    @FXML
+    private TableView<Sucursal> tblvSucursales;
+
+    @FXML
+    private JFXTextField txtIdSucursal;
+
     FXMLLoader fxmll;
+
+    TaskSucursalGetAll task;
 
     public PanelSucursal(WindowMain app) {
         this.app = app;
-    }
-
-    public void inicializar() throws Exception {
-        fxmll = new FXMLLoader(System.class.getResource("/org/glassware/gui/fxml/panel_sucursal.fxml"));
-        fxmll.setController(this);
-        fxmll.load();
-
-        btnCerrarModulo.setOnAction(evt -> {
-            app.cerrarModulo();
-        });
     }
 
     public Node getRoot() {
@@ -135,8 +139,39 @@ public class PanelSucursal {
         return fxmll;
     }
 
-    
-    
-    
+    public TableView<Sucursal> getTblvSucursales() {
+        return tblvSucursales;
+    }
+
+    public JFXTextField getTxtIdSucursal() {
+        return txtIdSucursal;
+    }
+
+    public void consultarSucursales() {
+        Thread hilo = null;
+        TaskSucursalGetAll task = new TaskSucursalGetAll(app, this);
+
+        hilo = new Thread(task);
+        hilo.start();
+
+    }
+
+    TableAdapterSucursal tableA = new TableAdapterSucursal();
+
+    public void inicializar() throws Exception {
+        fxmll = new FXMLLoader(System.class.getResource("/org/glassware/gui/fxml/panel_sucursal.fxml"));
+        fxmll.setController(this);
+        fxmll.load();
+
+        btnCerrarModulo.setOnAction(evt -> {
+            app.cerrarModulo();
+        });
+        
+        consultarSucursales();
+        tableA.adapt(tblvSucursales);
+       
+        
+
+    }
 
 }

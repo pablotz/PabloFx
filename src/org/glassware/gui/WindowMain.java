@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -56,6 +57,7 @@ public class WindowMain extends Application {
     PanelControlSala panelControlSala;
     PanelTratamientos panelTratamiento;
 
+    Alert alert;
     public static final Image ICONO_SPA = new Image(System.class.getResource("/resources/My Spa.png").toString());
     ControladorVentanas cv = new ControladorVentanas();
 
@@ -70,11 +72,10 @@ public class WindowMain extends Application {
         fxmll.load();
 
         scene = new Scene(fxmll.getRoot());
+        alert = new Alert(Alert.AlertType.NONE);
         agregarOyentes();
         window = primaryStage;
-
         window.setScene(scene);
-
         window.setMinHeight(768);
         window.setMinWidth(1300);
         inicializarComponentes();
@@ -83,8 +84,8 @@ public class WindowMain extends Application {
         window.setTitle("MySpa");
 
     }
-    
-    private void inicializarComponentes() throws Exception{
+
+    private void inicializarComponentes() throws Exception {
         panelCliente = new PanelCliente(this);
         panelCliente.inicializar();
         panelProducto = new PanelProducto(this);
@@ -99,7 +100,7 @@ public class WindowMain extends Application {
         panelControlSala.inicializar();
         panelTratamiento = new PanelTratamientos(this);
         panelTratamiento.inicializar();
-        
+
     }
 
     public void agregarOyentes() {
@@ -129,6 +130,12 @@ public class WindowMain extends Application {
     public void cerrarModulo() {
         pnlContenedorPrincipal.setCenter(pnlInicio);
     }
- 
+
+    public void showAlert(String titulo, String texto, Alert.AlertType tipoAlerta) {
+        alert.setTitle(titulo);
+        alert.setContentText(texto);
+        alert.setAlertType(tipoAlerta);
+        alert.showAndWait();
+    }
 
 }
