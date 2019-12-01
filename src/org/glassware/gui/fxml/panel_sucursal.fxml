@@ -75,12 +75,6 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <Label layoutX="119.0" layoutY="14.0" text="ID:">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
-                              <JFXTextField fx:id="txtIdSucursal" layoutX="171.0" layoutY="6.0" prefHeight="34.0" prefWidth="198.0" />
                            </children>
                         </AnchorPane>
                         <Label layoutX="52.0" layoutY="52.0" text="Nombre:">

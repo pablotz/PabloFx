@@ -12,11 +12,13 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import org.glassware.model.Sucursal;
 import org.glassware.task.sucursal.TableAdapterSucursal;
 import org.glassware.task.sucursal.TaskSucursalGetAll;
+import org.glassware.task.sucursal.TaskSucursalInsert;
 
 /**
  *
@@ -155,6 +157,48 @@ public class PanelSucursal {
         hilo.start();
 
     }
+    
+    public void addSucursales(){
+        String error = validarDatos();
+        if(error != null){
+            app.showAlert(error, error, Alert.AlertType.WARNING);
+            return;
+        }
+        
+        Sucursal s = new Sucursal();
+        s.setNombre(txtNombreSucursal.getText());
+        s.setDomicilio(txtDomicilioSucursal.getText());
+        s.setLatitud(Double.parseDouble(txtLatitudSucursal.getText()));
+        s.setLongitud(Double.parseDouble(txtLongitudSucursal.getText()));
+        
+        Thread hilo = null;
+        TaskSucursalInsert task = new TaskSucursalInsert(app, this, s);
+
+        hilo = new Thread(task);
+        hilo.start();
+    }
+    
+    public String validarDatos(){
+        String error = null;
+        
+        if(txtNombreSucursal.getText().trim().isEmpty())
+            error = "Debe especificar un nombre de sucursal";
+        else if(txtDomicilioSucursal.getText().trim().isEmpty())
+            error = "Debe especificar un domicilio de la sucursal";
+        else if(txtLatitudSucursal.getText().trim().isEmpty())
+            error = "Debe especificar la latitud de la sucursal";
+        else if(txtLongitudSucursal.getText().trim().isEmpty())
+            error = "Debe especificar la longitud de la sucursal";
+        else{
+            try {
+                Double.valueOf(txtLatitudSucursal.getText().trim());
+                Double.valueOf(txtLongitudSucursal.getText().trim());
+            } catch (NumberFormatException nfe) {
+                error = "Captura solo numero para latitud y longitud";
+            }
+        }
+        return error;
+    }
 
     TableAdapterSucursal tableA = new TableAdapterSucursal();
 
@@ -162,7 +206,11 @@ public class PanelSucursal {
         fxmll = new FXMLLoader(System.class.getResource("/org/glassware/gui/fxml/panel_sucursal.fxml"));
         fxmll.setController(this);
         fxmll.load();
-
+        
+        btnRegistrarSucursal.setOnAction(evt -> {
+            addSucursales();
+        });
+        
         btnCerrarModulo.setOnAction(evt -> {
             app.cerrarModulo();
         });
@@ -170,8 +218,6 @@ public class PanelSucursal {
         consultarSucursales();
         tableA.adapt(tblvSucursales);
        
-        
-
     }
 
 }
