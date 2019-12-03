@@ -10,7 +10,6 @@ package org.glassware.model;
  * @author EQUIPO
  */
 public class Persona {
-
     public int idPersona;
     public String nombre;
     public String apellidoPaterno;
@@ -97,5 +96,7 @@ public class Persona {
     public void setRfc(String rfc) {
         this.rfc = rfc;
     }
-
+    
+    
+    
 }

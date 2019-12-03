@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.glassware.task.sucursal;
+package org.glassware.task.sala;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -13,22 +13,22 @@ import java.net.URLEncoder;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
-import org.glassware.model.Sucursal;
 import org.glassware.commons.MySPACommons;
 import org.glassware.commons.MySPAHTTPUtils;
-import org.glassware.gui.PanelSucursal;
+import org.glassware.gui.PanelSala;
 import org.glassware.gui.WindowMain;
+import org.glassware.model.Sala;
 
 /**
  * Esta clase sirve para insertar un nuevo
  * registro de Sucursal.
  * @author LiveGrios
  */
-public class TaskSucursalInsert extends Task<Void>
+public class TaskSalaInsert extends Task<Void>
 {
     // El panel que contiene los controles visuales
     // relacionados con el modulo Sucursal:
-    PanelSucursal panelSucursal;
+    PanelSala panelSala;
     
     // La aplicación:
     WindowMain app;
@@ -41,19 +41,19 @@ public class TaskSucursalInsert extends Task<Void>
     HttpURLConnection connHttp;
     
     // El objeto que contiene todos los datos de la sucursal:
-    Sucursal sucursal;
+    Sala sala;
     
     // Guardamos la excepción, si es que ocurre una,
     // durante la ejecución paralela de la tarea:
     Exception resultException;
     
-    public TaskSucursalInsert(WindowMain app, 
-                              PanelSucursal panelSucursal, 
-                              Sucursal sucursal)
+    public TaskSalaInsert(WindowMain app, 
+                              PanelSala panelSala, 
+                              Sala sala)
     {
         this.app = app;
-        this.panelSucursal = panelSucursal;
-        this.sucursal = sucursal;
+        this.panelSala = panelSala;
+        this.sala = sala;
     }
     
     /**
@@ -86,7 +86,7 @@ public class TaskSucursalInsert extends Task<Void>
     private void save() throws Exception
     {
         // Establecemos la ruta del servicio REST:
-        String server = MySPACommons.URL_SERVER + "/api/Sucursal/insert?";
+        String server = MySPACommons.URL_SERVER + "/api/Sala/insert";
         
         // Generamos una URL con la ruta anteriormente establecida:
         URL url = new URL(server);
@@ -159,7 +159,7 @@ public class TaskSucursalInsert extends Task<Void>
             
             connHttp.disconnect();
             resultException = new Exception("Server responses with code: " + responseCode);
-            Platform.runLater(() -> { app.showAlert("Error al consultar catálogo de sucursales.", 
+            Platform.runLater(() -> { app.showAlert("Error al consultar catálogo de salas.", 
                                                     resultException.toString(), 
                                                     Alert.AlertType.NONE);
                                     });
@@ -174,63 +174,20 @@ public class TaskSucursalInsert extends Task<Void>
     @Override
     public void succeeded()
     {                
-        if (jso != null && jso.has("exception"))
-        {            
-            System.out.println(jso.get("exception").getAsString());
-            app.showAlert("Error", 
-                          jso.get("exception").getAsString(), 
-                          Alert.AlertType.ERROR);
-            return;
-        }
-        
-        if (jso != null && jso.has("error"))
-        {       
-            System.out.println(jso.get("error").getAsString());
-            app.showAlert("Error", 
-                          jso.get("error").getAsString(), 
-                          Alert.AlertType.ERROR);
-            return;
-        }
-        
-        if (resultException != null)
-        {
-            resultException.printStackTrace();
-            System.out.println("Exception Managed");           
-            app.showAlert("Error", 
-                          resultException.toString(), 
-                          Alert.AlertType.ERROR);
-            return;
-        }
-        
-        try
-        {
-            if (jso.has("id") && jso.get("id").getAsInt() > 0)
-            {
-                sucursal.setIdSucursal(jso.get("id").getAsInt());
-                panelSucursal.getTxtIdSucursal().setText("" + sucursal.getIdSucursal());
-                app.showAlert("Movimiento realizado.",
-                              "Sucursal agregada de forma correcta", 
-                              Alert.AlertType.INFORMATION);
-                panelSucursal.consultarSucursales();
-            }
+        try {
             
-        } 
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Exception managed.");
-            app.showAlert("Error", e.toString(), Alert.AlertType.ERROR);
-        }        
+            app.showAlert("Excepcion", e.toString(), Alert.AlertType.ERROR);
+        }
+        
     }
     
     private String buildPOSTParams() throws Exception
     {        
-        String params = "nombre=" + URLEncoder.encode(sucursal.getNombre(), "UTF-8") + 
-                        "&domicilio=" + URLEncoder.encode(sucursal.getDomicilio(), "UTF-8") +
-                        "&latitud=" + sucursal.getLatitud() + 
-                        "&longitud=" + sucursal.getLongitud();
-        
-        System.out.println(params);
+        String params = "nombre=" + URLEncoder.encode(sala.getNombre(), "UTF-8") + 
+                        "&descripcion=" + URLEncoder.encode(sala.getDescripcion(), "UTF-8") +
+                        "&idSucursal=" + sala.getSucursal().getIdSucursal();
         return params;
     }
     

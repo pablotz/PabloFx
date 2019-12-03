@@ -60,8 +60,18 @@ public class Sucursal {
         this.estatus = estatus;
     }
 
-   
+    public Sucursal(int idSucursal, String nombre, String domicilio, double latitud, double longitud, int estatus) {
+        this.idSucursal = idSucursal;
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.estatus = estatus;
+    }
 
+    
+
+   
     public Sucursal() {
     }
     

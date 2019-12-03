@@ -14,28 +14,8 @@ public class Cliente {
     private String numeroUnico;
     private String correo;
     private int estatus;
-    private Persona idPersona;
-    private Usuario idUsuario;
-
-    public Cliente() {
-    }
-
-    public Cliente(int idCliente, String numeroUnico, String correo, int estatus, Persona idPersona, Usuario idUsuario) {
-        this.idCliente = idCliente;
-        this.numeroUnico = numeroUnico;
-        this.correo = correo;
-        this.estatus = estatus;
-        this.idPersona = idPersona;
-        this.idUsuario = idUsuario;
-    }
-
-    public Usuario getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
-    }
+    private Persona persona;
+    private Usuario usuario;
 
     public int getIdCliente() {
         return idCliente;
@@ -69,20 +49,43 @@ public class Cliente {
         this.estatus = estatus;
     }
 
-    public Persona getIdPersona() {
-        return idPersona;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setIdPersona(Persona idPersona) {
-        this.idPersona = idPersona;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Cliente() {
+    }
+
+    public Cliente(int idCliente, String numeroUnico, String correo, int estatus, Persona persona, Usuario usuario) {
+        this.idCliente = idCliente;
+        this.numeroUnico = numeroUnico;
+        this.correo = correo;
+        this.estatus = estatus;
+        this.persona = persona;
+        this.usuario = usuario;
+    }
+
+
+    
 
     @Override
     public String toString() {
-        return getIdCliente()+" "+getNumeroUnico()+" "+getCorreo()+" "+getEstatus()+" "+getIdPersona().getIdPersona()+" "+getIdPersona().getNombre()+" "
-                +getIdPersona().getApellidoPaterno()+" "+getIdPersona().getApellidoMaterno()+" "+getIdPersona().getGenero()+" "+getIdPersona().getDomicilio()+" "
-                +getIdPersona().getTelefono()+" "+getIdPersona().getRfc()+" "+getIdUsuario().getIdUsuario()+" "+getIdUsuario().getNombreUsuario()+" "+
-                getIdUsuario().getContrasenia()+" "+getIdUsuario().getRol();
+        return getIdCliente()+" "+getNumeroUnico()+" "+getCorreo()+" "+getEstatus()+" "+getPersona().getIdPersona()+" "+getPersona().getNombre()+" "
+                +getPersona().getApellidoPaterno()+" "+getPersona().getApellidoMaterno()+" "+getPersona().getGenero()+" "+getPersona().getDomicilio()+" "
+                +getPersona().getTelefono()+" "+getPersona().getRfc()+" "+getUsuario().getIdUsuario()+" "+getUsuario().getNombreUsuario()+" "+
+                getUsuario().getContrasenia()+" "+getUsuario().getRol();
     }
     
 }

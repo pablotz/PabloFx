@@ -21,7 +21,7 @@ public class TableAdapterSucursal
     {
         //Creamos las columnas y establecemos el texto de cabecera 
         //que mostrarán:
-        TableColumn<Sucursal, Integer> tcId = new TableColumn<>("Clave");
+        
         TableColumn<Sucursal, String> tcNombre = new TableColumn<>("Nombre");
         TableColumn<Sucursal, String> tcDomicilio = new TableColumn<>("Domicilio");
         TableColumn<Sucursal, Double> tcLongitud = new TableColumn<>("Longitud");
@@ -33,14 +33,14 @@ public class TableAdapterSucursal
         //un CellFactory y un CallBack.
         
         //Para propiedades directas, del objeto podemos utilizar:
-        tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        
         tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tcDomicilio.setCellValueFactory(new PropertyValueFactory<>("domicilio"));
         tcLongitud.setCellValueFactory(new PropertyValueFactory<>("longitud"));
         tcLatitud.setCellValueFactory(new PropertyValueFactory<>("latitud"));
         tcStatus.setCellValueFactory(new PropertyValueFactory<>("estatus"));
         
-        table.getColumns().addAll(tcId, tcNombre, tcDomicilio,
+        table.getColumns().addAll(tcNombre, tcDomicilio,
                                   tcLongitud, tcLatitud, tcStatus);
     }
 }

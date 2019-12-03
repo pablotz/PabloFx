@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.glassware.task.sucursal;
+package org.glassware.task.sala;
 
+import org.glassware.task.sucursal.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -19,8 +20,10 @@ import javafx.scene.control.Alert;
 import org.glassware.model.Sucursal;
 import org.glassware.commons.MySPACommons;
 import org.glassware.commons.MySPAHTTPUtils;
+import org.glassware.gui.PanelSala;
 import org.glassware.gui.PanelSucursal;
 import org.glassware.gui.WindowMain;
+import org.glassware.model.Sala;
 
 /**
  * Esta clase nos permite consultar todos los registros de las sucursales
@@ -28,11 +31,11 @@ import org.glassware.gui.WindowMain;
  *
  * @author LiveGrios
  */
-public class TaskSucursalGetAll extends Task<Void> {
+public class TaskSalaGetAll extends Task<Void> {
 
     // El Panel que contiene todos los controles visuales
     // que manipulan el catálogo y los datos de las sucursales:
-    PanelSucursal panelSucursal;
+    PanelSala panelSala;
 
     // Necesitamos el objeto que hace referencia a la aplicación:
     WindowMain app;
@@ -41,15 +44,15 @@ public class TaskSucursalGetAll extends Task<Void> {
     HttpURLConnection connHttp;
 
     // La lista dinámica que contendrá objetos de tipo Sucursal:
-    List<Sucursal> sucursales;
+    List<Sala> sala;
 
     // Guardamos la excepción, si es que ocurre una,
     // durante la ejecución paralela de la tarea:
     Exception resultException;
 
-    public TaskSucursalGetAll(WindowMain app, PanelSucursal panelSucursal) {
+    public TaskSalaGetAll(WindowMain app, PanelSala panelSala) {
         this.app = app;
-        this.panelSucursal = panelSucursal;
+        this.panelSala = panelSala;
     }
 
     /**
@@ -80,7 +83,7 @@ public class TaskSucursalGetAll extends Task<Void> {
      */
     private void getAll() throws Exception {
         // Establecemos la ruta del servicio REST:
-        String server = MySPACommons.URL_SERVER + "/api/Sucursal/mostrar";
+        String server = MySPACommons.URL_SERVER + "/api/Sala/mostrar";
 
         // Generamos una URL con la ruta anteriormente establecida:
         URL url = new URL(server);
@@ -124,13 +127,13 @@ public class TaskSucursalGetAll extends Task<Void> {
             connHttp.disconnect();
 
             // Convertimos el texto JSON en una lista dinámica de Java:
-            sucursales = parseSucursales(responseContent);
+            sala = perseSalas(responseContent);
 
             // Actualizamos la tabla (el control visual TableView) de sucursales
             // dentro del hilo de JavaFX, porque de no hacerlo allí, se generará
             // una excepción:
             Platform.runLater(() -> {
-                panelSucursal.getTblvSucursales().setItems(FXCollections.observableArrayList(sucursales));
+                panelSala.getTblSalas().setItems(FXCollections.observableArrayList(sala));
             });
         } else // Si hubo un error, nos desconectamos del servidor y 
         // mostramos el mensaje correspondiente dentro del hilo
@@ -139,7 +142,7 @@ public class TaskSucursalGetAll extends Task<Void> {
             connHttp.disconnect();
             resultException = new Exception("Server responses with code: " + responseCode);
             Platform.runLater(() -> {
-                app.showAlert("Error al consultar catálogo de sucursales.",
+                app.showAlert("Error al consultar catálogo de salas.",
                         resultException.toString(),
                         Alert.AlertType.NONE);
             });
@@ -149,28 +152,28 @@ public class TaskSucursalGetAll extends Task<Void> {
 
     /**
      * Este método convierte una cadena JSON en una lista de sucursales Java de
-     * tipo ArrayList<Sucursal>.
+     * tipo ArrayList<Sala>.
      *
      * @param strJson
      * @return
      * @throws Exception
      */
-    private List<Sucursal> parseSucursales(String strJson) throws Exception {
+    private List<Sala> perseSalas(String strJson) throws Exception {
         // Esta es la lista que contendrá los objetos de tipo Sucursal:
-        List<Sucursal> sucursales = new ArrayList<>();
+        List<Sala> salas = new ArrayList<>();
 
         // Con este objeto le vamos a indicar a Gson que queremos convertir
         // el contenido JSON en una List<Sucursal>:
-        Type listType = new TypeToken<List<Sucursal>>() {
+        Type listType = new TypeToken<List<Sala>>() {
         }.getType();
 
         // Creamos un objeto de tipo Gson:
         Gson gson = new Gson();
 
         // Convertimos la cadena JSON en una lista de sucursales de Java:
-        sucursales = gson.fromJson(strJson, listType);
+        sala = gson.fromJson(strJson, listType);
 
         // Devolvemos la lista creada:
-        return sucursales;
+        return sala;
     }
 }

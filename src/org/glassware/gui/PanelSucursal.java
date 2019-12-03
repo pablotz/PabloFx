@@ -12,11 +12,16 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import org.glassware.gui.components.TableAdapterSucursal;
+import org.glassware.model.Sala;
 import org.glassware.model.Sucursal;
-import org.glassware.task.sucursal.TableAdapterSucursal;
+import org.glassware.task.sala.TaskSalaInsert;
+
 import org.glassware.task.sucursal.TaskSucursalGetAll;
+import org.glassware.task.sucursal.TaskSucursalInsert;
 
 /**
  *
@@ -73,6 +78,8 @@ public class PanelSucursal {
 
     public PanelSucursal(WindowMain app) {
         this.app = app;
+        fxmll = new FXMLLoader(System.class.getResource("/org/glassware/gui/fxml/panel_sucursal.fxml"));
+        fxmll.setController(this);
     }
 
     public Node getRoot() {
@@ -156,21 +163,63 @@ public class PanelSucursal {
 
     }
 
+    public String validarDatosSala() {
+        String error = null;
+
+        if (txtNombreSucursal.getText().trim().isEmpty()) {
+            error = "Debe especificar un nombre de sala";
+        } else if (txtDomicilioSucursal.getText().trim().isEmpty()) {
+            error = "Debe especificar una descripción";
+        } else if (txtLatitudSucursal.getText().trim().isEmpty()) {
+            error = "Debe espicificar una latitud a la sala";
+        } else if (txtLongitudSucursal.getText().trim().isEmpty()) {
+            error = "Debe espicificar una longitud a la sala";
+        }
+        return error;
+    }
+
+    public void addSucursal() {
+        String error = validarDatosSala();
+
+        if (error != null) {
+            app.showAlert("Datos incorrectos", error, Alert.AlertType.WARNING);
+            return;
+        }
+        else{
+        Sucursal su = new Sucursal();
+
+        su.setNombre(txtNombreSucursal.getText());
+        su.setDomicilio(txtDomicilioSucursal.getText());
+        su.setLatitud(Double.parseDouble(txtLatitudSucursal.getText()));
+        su.setLongitud(Double.parseDouble(txtLongitudSucursal.getText()));
+
+        Thread hilo = null;
+
+        TaskSucursalInsert task2 = new TaskSucursalInsert(app, this, su);
+            System.out.println("Insertar fjfjfjf");
+
+        hilo = new Thread(task2);
+        hilo.start();
+        }
+
+    }
+
     TableAdapterSucursal tableA = new TableAdapterSucursal();
 
     public void inicializar() throws Exception {
-        fxmll = new FXMLLoader(System.class.getResource("/org/glassware/gui/fxml/panel_sucursal.fxml"));
-        fxmll.setController(this);
+
         fxmll.load();
 
         btnCerrarModulo.setOnAction(evt -> {
             app.cerrarModulo();
         });
-        
+
+        btnRegistrarSucursal.setOnAction(evt -> {
+            addSucursal();
+        });
+
         consultarSucursales();
         tableA.adapt(tblvSucursales);
-       
-        
 
     }
 
