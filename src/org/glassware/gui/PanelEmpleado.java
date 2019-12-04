@@ -533,6 +533,7 @@ public class PanelEmpleado {
 
     public void seleccionarEmpleado() {
         tblvEmpleados.getSelectionModel().selectedItemProperty().addListener(evt -> {
+            allTabPane.getSelectionModel().select(tabMasterDetails );
             mostrarDetalleEmpleado();
         });
     }
