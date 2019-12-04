@@ -1,4 +1,4 @@
-package org.glassware.task.sala;
+package org.glassware.task.producto;
 
 import org.glassware.task.sucursal.*;
 import com.google.gson.JsonObject;
@@ -11,31 +11,31 @@ import javafx.scene.control.Alert;
 import org.glassware.model.Sucursal;
 import org.glassware.commons.MySPACommons;
 import org.glassware.commons.MySPAHTTPUtils;
-import org.glassware.gui.PanelSala;
+import org.glassware.gui.PanelProducto;
 import org.glassware.gui.PanelSucursal;
 import org.glassware.gui.WindowMain;
-import org.glassware.model.Sala;
+import org.glassware.model.Producto;
 
 /**
  *
  * @author LiveGrios
  */
-public class TaskSalaUpdate extends Task<Void>
+public class TaskProductoDelete extends Task<Void>
 {
-    PanelSala panelSala;
+    PanelProducto panelProducto;
     WindowMain app;
     
     JsonObject jso;
     HttpURLConnection connHttp;
-    Sala sala;
+    Producto producto;
     
     Exception resultException;
     
-    public TaskSalaUpdate(WindowMain app, PanelSala panelSala, Sala sala)
+    public TaskProductoDelete(WindowMain app, PanelProducto panelProducto, Producto producto)
     {
         this.app = app;
-        this.panelSala = panelSala;
-        this.sala = sala;
+        this.panelProducto = panelProducto;
+        this.producto = producto;
     }
     
     @Override
@@ -55,7 +55,7 @@ public class TaskSalaUpdate extends Task<Void>
     
     private void save() throws Exception
     {
-        String server = MySPACommons.URL_SERVER + "/api/sucursal/update?";
+        String server = MySPACommons.URL_SERVER + "/api/Producto/delete?";
         String postParams = buildPOSTParams();
         JsonParser jp = new JsonParser();
         URL url = new URL(server);
@@ -102,47 +102,26 @@ public class TaskSalaUpdate extends Task<Void>
     @Override
     public void succeeded()
     {                
-        if (jso != null && jso.has("exception"))
-        {            
-            System.out.println(jso.get("exception").getAsString());
-            app.showAlert("Error", 
-                          jso.get("exception").getAsString(), 
-                          Alert.AlertType.ERROR);
-            return;
-        }
-        
-        if (jso != null && jso.has("error"))
-        {       
-            System.out.println(jso.get("error").getAsString());
-            app.showAlert("Error", 
-                          jso.get("error").getAsString(), 
-                          Alert.AlertType.ERROR);
-            return;
-        }
-        
-        if (resultException != null)
-        {
-            resultException.printStackTrace();
-            System.out.println("Exception Managed");           
-            app.showAlert("Error", 
-                          resultException.toString(), 
-                          Alert.AlertType.ERROR);
-            return;
-        }
-        
-        app.showAlert("Movimiento realizado.", 
-                      "Sucursal actualizada de forma correcta",
-                      Alert.AlertType.INFORMATION);
-        panelSala.consultarSala();
+         try{
+            if(jso.has("result")){
+                if (jso.get("result").getAsString().toLowerCase().equals("exito")) {
+                    app.showAlert("Movimiento realizado", "Se elimino el registro correctamente", Alert.AlertType.INFORMATION);
+                    panelProducto.consultarProductos();
+                }else
+                    app.showAlert("Error", jso.get("result").getAsString(), Alert.AlertType.WARNING);
+                
+            }else{
+                app.showAlert("Error", "Error desconocido", Alert.AlertType.ERROR);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            app.showAlert("Excepcion", e.toString(), Alert.AlertType.ERROR);
+        } 
     }
-    
     private String buildPOSTParams() throws Exception
     {        
-        String params = "id=" + sala.getIdSala()+ 
-                        "&nombre=" + URLEncoder.encode(sala.getNombre(), "UTF-8") + 
-                        "&domicilio=" + URLEncoder.encode(sala.getDescripcion(), "UTF-8")+
-                        "&latitud=" + sala.getEstatus()+ 
-                        "&longitud=" + sala.getSucursal().getIdSucursal();
+        String params = "idProducto=" + producto.getIdProducto();
+        
         return params;
     }
     

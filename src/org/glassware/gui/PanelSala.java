@@ -2,6 +2,7 @@ package org.glassware.gui;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
@@ -12,13 +13,11 @@ import javafx.scene.control.TableView;
 import org.glassware.gui.components.TableAdapterSala;
 import org.glassware.model.Sala;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableRow;
-import javafx.scene.input.MouseButton;
 import org.glassware.model.Sucursal;
+import org.glassware.task.sala.TaskSalaDelete;
 import org.glassware.task.sala.TaskSalaGetAll;
 import org.glassware.task.sala.TaskSalaInsert;
-import org.glassware.task.sucursal.TaskSucursalGetAll;
+import org.glassware.task.sala.TaskSalaUpdate;
 
 /**
  *
@@ -71,6 +70,12 @@ public class PanelSala {
 
     @FXML
     private JFXComboBox<Sucursal> cmbSucursal;
+
+    @FXML
+    private JFXTextField txtIdSala;
+
+    @FXML
+    private JFXTabPane tabpSalas;
 
     FXMLLoader fxmll;
 
@@ -134,6 +139,18 @@ public class PanelSala {
 
     public TableView<Sala> getTblSalas() {
         return tblSalas;
+    }
+
+    public JFXComboBox getCmbEstatus() {
+        return cmbEstatus;
+    }
+
+    public JFXComboBox<Sucursal> getCmbSucursal() {
+        return cmbSucursal;
+    }
+
+    public JFXTextField getTxtIdSala() {
+        return txtIdSala;
     }
 
     public void consultarSala() {
@@ -204,30 +221,89 @@ public class PanelSala {
 
     }
 
-    private void selecionarTabla() {
-        tblSalas.setRowFactory(evt -> {
-            TableRow<Sala> row = new TableRow<>();
+    public void mostrarDetalleProducto() {
+        Sala sa = tblSalas.getSelectionModel().getSelectedItem();
+        if (sa == null) {
+            limpiarCampos();
+            return;
+        } else {
+            txtIdSala.setText("" + sa.getIdSala());
+            txtIdSala.setVisible(false);
+            txtNombreSala.setText("" + sa.getNombre());
+            txtDescripcionSala.setText("" + sa.getDescripcion());
+            //cmbEstatus.setText("" + sa.getEstatus());
 
-                row.setOnMouseClicked(event -> {
-                    if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
-                            && event.getClickCount() == 2) {
+            if (sa.getEstatus() == 1) {
 
-                        Sala clickedRow = row.getItem();
-                        printRow(clickedRow);
-                    }
-                });
-                return row;
-        });
+            } else {
+
+            }
+
+        }
     }
 
-    private void printRow(Sala item) {
-        txtNombreSala.setText(item.getNombre());
-        txtDescripcionSala.setText(item.getDescripcion());
+    public void updateSala() {
+        String error = validarDatosSala();
+
+        if (error != null) {
+            app.showAlert("Datos Incorrectos", error, Alert.AlertType.ERROR);
+            return;
+        }
+
+        Thread hilo = null;
+        Sala sa = new Sala();
+
+        sa.setIdSala(Integer.parseInt(txtIdSala.getText()));
+        sa.setNombre(txtNombreSala.getText());
+        sa.setDescripcion(txtDescripcionSala.getText());
+        sa.setEstatus((int) cmbEstatus.getItems().get(0));
+        sa.setSucursal(cmbSucursal.getItems().get(0));
+
+        TaskSalaUpdate task2 = new TaskSalaUpdate(app, this, sa);
+        hilo = new Thread(task2);
+        hilo.start();
+    }
+
+    public void deleteSala() {
+        String error = validarDatosSala();
+
+        if (error != null) {
+            app.showAlert("Sleeciona una persona", error, Alert.AlertType.WARNING);
+            return;
+        }
+        Thread hilo = null;
+        Sala sa = new Sala();
+
+        sa.setIdSala(Integer.parseInt(txtIdSala.getText()));
+        sa.setNombre(txtNombreSala.getText());
+        sa.setDescripcion(txtDescripcionSala.getText());
+
+        TaskSalaDelete task2 = new TaskSalaDelete(app, this, sa);
+
+        hilo = new Thread(task2);
+        hilo.start();
+    }
+
+    public void limpiarCampos() {
+
+        txtDescripcionSala.setText("");
+        txtNombreSala.setText("");
     }
 
     public void inicializar() throws Exception {
-
         fxmll.load();
+        llenarComboBox();
+        consultarSala();
+        bloquearComponentes();
+        agregarOyentes();
+        tableSA.adapt(tblSalas);
+    }
+
+    public void agregarOyentes() {
+        tblSalas.getSelectionModel().selectedItemProperty().addListener(evt -> {
+            tabpSalas.getSelectionModel().select(tabRegistrarSala);
+            mostrarDetalleProducto();
+        });
 
         btnCerrarModulo.setOnAction(evt -> {
             app.cerrarModulo();
@@ -236,12 +312,11 @@ public class PanelSala {
         btnRegistrarSala.setOnAction(evt -> {
             addSala();
         });
-        
-        selecionarTabla();
-        llenarComboBox();
-        consultarSala();
-        bloquearComponentes();
-        tableSA.adapt(tblSalas);
+
+        btnEliminarSala.setOnAction(evt -> {
+            deleteSala();
+        });
+
     }
 
 }

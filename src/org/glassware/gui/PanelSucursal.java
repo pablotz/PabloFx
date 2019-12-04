@@ -6,9 +6,8 @@
 package org.glassware.gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,12 +15,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import org.glassware.gui.components.TableAdapterSucursal;
-import org.glassware.model.Sala;
 import org.glassware.model.Sucursal;
-import org.glassware.task.sala.TaskSalaInsert;
-
+import org.glassware.task.sucursal.TaskSucursalDelete;
 import org.glassware.task.sucursal.TaskSucursalGetAll;
 import org.glassware.task.sucursal.TaskSucursalInsert;
+import org.glassware.task.sucursal.TaskSucursalUpdate;
 
 /**
  *
@@ -71,6 +69,9 @@ public class PanelSucursal {
 
     @FXML
     private JFXTextField txtIdSucursal;
+    
+    @FXML
+    private JFXComboBox cmbEstadoSucursal;
 
     FXMLLoader fxmll;
 
@@ -153,6 +154,71 @@ public class PanelSucursal {
     public JFXTextField getTxtIdSucursal() {
         return txtIdSucursal;
     }
+    
+    private void llenarComboBox() {
+        cmbEstadoSucursal.getItems().addAll("Activo", "Inactivo");
+    }
+
+    public void mostrarDetalleSucursal() {
+        Sucursal su = tblvSucursales.getSelectionModel().getSelectedItem();
+        if (su == null) {
+            limpiarCampos();
+            return;
+        } else {
+            txtIdSucursal.setText("" + su.getIdSucursal());
+            txtIdSucursal.setVisible(false);
+            txtNombreSucursal.setText("" + su.getNombre());
+            txtDomicilioSucursal.setText("" + su.getDomicilio());
+            txtLatitudSucursal.setText("" + su.getLatitud());
+            txtLongitudSucursal.setText("" + su.getLongitud());
+            
+        }
+    }
+
+    public void limpiarCampos() {
+
+        txtNombreSucursal.setText("");
+        txtDomicilioSucursal.setText("");
+        txtLatitudSucursal.setText("");
+        txtLongitudSucursal.setText("");
+
+    }
+
+    public void deleteSucursal() {
+        String error = validarDatos();
+        if (error != null) {
+            app.showAlert("Datos Incorectos", error, Alert.AlertType.WARNING);
+            return;
+        }
+        Thread hilo = null;
+        Sucursal su = new Sucursal();
+        su.setIdSucursal(Integer.parseInt(txtIdSucursal.getText()));
+        su.setNombre(txtNombreSucursal.getText());
+        su.setDomicilio(txtDomicilioSucursal.getText());
+        su.setLatitud(Double.parseDouble(txtLatitudSucursal.getText()));
+        su.setLatitud(Double.parseDouble(txtLongitudSucursal.getText()));
+
+        TaskSucursalDelete task2 = new TaskSucursalDelete(app, this, su);
+        hilo = new Thread(task2);
+        hilo.start();
+
+    }
+
+    public String validarDatos() {
+        String error = null;
+        if (txtNombreSucursal.getText().trim().isEmpty()) {
+            error = "Debe de especificar un nombre de producto";
+        } else if (txtDomicilioSucursal.getText().trim().isEmpty()) {
+            error = "Debe de especificar la marca del producto";
+        } else {
+            try {
+                Float.valueOf(txtLatitudSucursal.getText().trim());
+            } catch (Exception e) {
+                error = "Captura solo numeros para el precio";
+            }
+        }
+        return error;
+    }
 
     public void consultarSucursales() {
         Thread hilo = null;
@@ -184,23 +250,43 @@ public class PanelSucursal {
         if (error != null) {
             app.showAlert("Datos incorrectos", error, Alert.AlertType.WARNING);
             return;
-        }
-        else{
-        Sucursal su = new Sucursal();
+        } else {
+            Sucursal su = new Sucursal();
 
+            su.setNombre(txtNombreSucursal.getText());
+            su.setDomicilio(txtDomicilioSucursal.getText());
+            su.setLatitud(Double.parseDouble(txtLatitudSucursal.getText()));
+            su.setLongitud(Double.parseDouble(txtLongitudSucursal.getText()));
+
+            Thread hilo = null;
+
+            TaskSucursalInsert task2 = new TaskSucursalInsert(app, this, su);
+            System.out.println("Insertar fjfjfjf");
+
+            hilo = new Thread(task2);
+            hilo.start();
+        }
+
+    }
+
+    public void updateProducto() {
+        String error = validarDatos();
+        if (error != null) {
+            app.showAlert("Datos Incorectos", error, Alert.AlertType.WARNING);
+            return;
+        }
+        Thread hilo = null;
+        Sucursal su = new Sucursal();
+        
+        su.setIdSucursal(Integer.parseInt(txtIdSucursal.getText()));
         su.setNombre(txtNombreSucursal.getText());
         su.setDomicilio(txtDomicilioSucursal.getText());
         su.setLatitud(Double.parseDouble(txtLatitudSucursal.getText()));
         su.setLongitud(Double.parseDouble(txtLongitudSucursal.getText()));
 
-        Thread hilo = null;
-
-        TaskSucursalInsert task2 = new TaskSucursalInsert(app, this, su);
-            System.out.println("Insertar fjfjfjf");
-
+        TaskSucursalUpdate task2 = new TaskSucursalUpdate(app, this, su);
         hilo = new Thread(task2);
         hilo.start();
-        }
 
     }
 
@@ -209,6 +295,17 @@ public class PanelSucursal {
     public void inicializar() throws Exception {
 
         fxmll.load();
+        agrgarOyentes();
+        consultarSucursales();
+        llenarComboBox();
+        tableA.adapt(tblvSucursales);
+
+    }
+
+    public void agrgarOyentes() {
+        tblvSucursales.getSelectionModel().selectedItemProperty().addListener(evt -> {
+            mostrarDetalleSucursal();
+        });
 
         btnCerrarModulo.setOnAction(evt -> {
             app.cerrarModulo();
@@ -218,8 +315,9 @@ public class PanelSucursal {
             addSucursal();
         });
 
-        consultarSucursales();
-        tableA.adapt(tblvSucursales);
+        btnEliminarSucursal.setOnAction(evt -> {
+            deleteSucursal();
+        });
 
     }
 
