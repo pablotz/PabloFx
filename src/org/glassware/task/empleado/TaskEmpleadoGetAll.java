@@ -81,7 +81,7 @@ public class TaskEmpleadoGetAll extends Task<Void> {
      */
     private void getAll() throws Exception {
         // Establecemos la ruta del servicio REST:
-        String server = MySPACommons.URL_SERVER + "/api/MySpaRest/Empleado";
+        String server = MySPACommons.URL_SERVER + "/api/Empleado/mostrar";
 
         // Generamos una URL con la ruta anteriormente establecida:
         URL url = new URL(server);

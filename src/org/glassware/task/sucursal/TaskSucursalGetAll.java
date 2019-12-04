@@ -80,7 +80,7 @@ public class TaskSucursalGetAll extends Task<Void> {
      */
     private void getAll() throws Exception {
         // Establecemos la ruta del servicio REST:
-        String server = MySPACommons.URL_SERVER + "/api/restIntegradorSucursal";
+        String server = MySPACommons.URL_SERVER + "/api/Sucursal/mostrar";
 
         // Generamos una URL con la ruta anteriormente establecida:
         URL url = new URL(server);

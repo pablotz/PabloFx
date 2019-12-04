@@ -13,7 +13,7 @@ public class Sala {
     String foto;
     String rutaFoto;
     int estatus;
-    int idSucursal;
+    Sucursal sucursal;
 
     public int getIdSala() {
         return idSala;
@@ -63,33 +63,27 @@ public class Sala {
         this.estatus = estatus;
     }
 
-    public int getIdSucursal() {
-        return idSucursal;
+    public Sucursal getSucursal() {
+        return sucursal;
     }
 
-    public void setIdSucursal(int idSucursal) {
-        this.idSucursal = idSucursal;
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
 
-    public Sala(int idSala, String nombre, String descripcion, String foto, String rutaFoto, int estatus, int idSucursal) {
+    public Sala(int idSala, String nombre, String descripcion, String foto, String rutaFoto, int estatus, Sucursal sucursal) {
         this.idSala = idSala;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.foto = foto;
         this.rutaFoto = rutaFoto;
         this.estatus = estatus;
-        this.idSucursal = idSucursal;
-    }
-    
-    
-    
-
-    @Override
-    public String toString() { //sobreescribimos el metodo toString 
-        return idSala + "  " + nombre;  //traemos los datos datos en el core principal
+        this.sucursal = sucursal;
     }
 
     public Sala() {
     }
+
+    
 
 }

@@ -28,6 +28,7 @@ public class PanelSucursal {
 
     @FXML
     JFXButton btnCerrarModulo;
+    
     WindowMain app;
 
     @FXML
@@ -66,8 +67,7 @@ public class PanelSucursal {
     @FXML
     private TableView<Sucursal> tblvSucursales;
 
-    @FXML
-    private JFXTextField txtIdSucursal;
+
 
     FXMLLoader fxmll;
 
@@ -145,9 +145,6 @@ public class PanelSucursal {
         return tblvSucursales;
     }
 
-    public JFXTextField getTxtIdSucursal() {
-        return txtIdSucursal;
-    }
 
     public void consultarSucursales() {
         Thread hilo = null;

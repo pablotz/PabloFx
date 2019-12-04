@@ -17,22 +17,8 @@ public class Empleado {
     public int estatus;
     public String foto;
     public String rutaFoto;
-    public Persona idPersona;
-    public Usuario idUsuario;
-
-    public Empleado(int idEmpleado, String numeroEmpleado, String puesto, int estatus, String foto, String rutaFoto, Persona idPersona, Usuario idUsuario) {
-        this.idEmpleado = idEmpleado;
-        this.numeroEmpleado = numeroEmpleado;
-        this.puesto = puesto;
-        this.estatus = estatus;
-        this.foto = foto;
-        this.rutaFoto = rutaFoto;
-        this.idPersona = idPersona;
-        this.idUsuario = idUsuario;
-    }
-
-    public Empleado() {
-    }
+    public Persona persona;
+    public Usuario usuario;
 
     public int getIdEmpleado() {
         return idEmpleado;
@@ -82,22 +68,35 @@ public class Empleado {
         this.rutaFoto = rutaFoto;
     }
 
-    public Persona getIdPersona() {
-        return idPersona;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setIdPersona(Persona idPersona) {
-        this.idPersona = idPersona;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
-    
-    
+
+    public Empleado(int idEmpleado, String numeroEmpleado, String puesto, int estatus, String foto, String rutaFoto, Persona persona, Usuario usuario) {
+        this.idEmpleado = idEmpleado;
+        this.numeroEmpleado = numeroEmpleado;
+        this.puesto = puesto;
+        this.estatus = estatus;
+        this.foto = foto;
+        this.rutaFoto = rutaFoto;
+        this.persona = persona;
+        this.usuario = usuario;
+    }
+
+    public Empleado() {
+    }
+
     
 }

@@ -6,7 +6,7 @@ package org.glassware.model;
  * @author ximena Uribe
  */
 public class Producto {
-    private String id;
+    private int idProducto;
     private String nombre;
     private String marca;
     private int estatus;
@@ -19,8 +19,8 @@ public class Producto {
     }
     
     
-    public Producto(String id, String nombre, String marca, int estatus, float precioUso) {
-        this.id = id;
+    public Producto(int id, String nombre, String marca, int estatus, float precioUso) {
+        this.idProducto = id;
         this.nombre = nombre;
         this.marca = marca;
         this.estatus = estatus;
@@ -30,12 +30,12 @@ public class Producto {
     public Producto() {
     }
 
-    public String getId() {
-        return id;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdProducto(int id) {
+        this.idProducto = id;
     }
 
     public String getNombre() {
@@ -71,7 +71,7 @@ public class Producto {
     }
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", marca=" + marca + ", estatus=" + estatus + ", precioUso=" + precioUso + '}';
+        return "Producto{" + "id=" + idProducto + ", nombre=" + nombre + ", marca=" + marca + ", estatus=" + estatus + ", precioUso=" + precioUso + '}';
     }
     
     

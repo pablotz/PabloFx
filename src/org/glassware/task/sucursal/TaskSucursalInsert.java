@@ -86,7 +86,7 @@ public class TaskSucursalInsert extends Task<Void>
     private void save() throws Exception
     {
         // Establecemos la ruta del servicio REST:
-        String server = MySPACommons.URL_SERVER + "/api/sucursal/insert?";
+        String server = MySPACommons.URL_SERVER + "/api/Sucursal/insert?";
         
         // Generamos una URL con la ruta anteriormente establecida:
         URL url = new URL(server);
@@ -207,7 +207,7 @@ public class TaskSucursalInsert extends Task<Void>
             if (jso.has("id") && jso.get("id").getAsInt() > 0)
             {
                 sucursal.setIdSucursal(jso.get("id").getAsInt());
-                panelSucursal.getTxtIdSucursal().setText("" + sucursal.getIdSucursal());
+                //panelSucursal.getTxtIdSucursal().setText("" + sucursal.getIdEmpleado());
                 app.showAlert("Movimiento realizado.",
                               "Sucursal agregada de forma correcta", 
                               Alert.AlertType.INFORMATION);
