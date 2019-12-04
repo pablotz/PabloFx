@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.glassware.task.empleado;
+package org.glassware.gui.components;
 
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -43,6 +43,7 @@ public class TableAdapterEmpleado
         TableColumn<Empleado, String> tcPuesto = new TableColumn<>("Puesto");
         TableColumn<Empleado, String> tcNombreUsuario = new TableColumn<>("Nombre de Usuario");
         TableColumn<Empleado, String> tcRol = new TableColumn<>("Rol");
+        TableColumn<Empleado, String> tcEstatus = new TableColumn<>("Estatus");
         
         //Para propiedades directas, del objeto podemos utilizar:
         tcNumeroEmpleado.setCellValueFactory(new PropertyValueFactory<Empleado, String>("numeroEmpleado"));
@@ -400,6 +401,51 @@ public class TableAdapterEmpleado
             }
         });
         
+        tcEstatus.setCellFactory(new Callback<TableColumn<Empleado, String>, 
+                                       TableCell<Empleado, String>>()
+        {
+            @Override
+            public TableCell<Empleado, String> call(TableColumn<Empleado, 
+                                                    String> param)
+            {
+                return new TableCell<Empleado, String>()
+                {
+                    @Override
+                    protected void updateItem(String item, boolean empty) 
+                    {
+                        //Pedimos el indice del elemento que quiere mostrar
+                        //el TableView:
+                        int indice = getIndex();
+                        
+                        Empleado e = null;
+                        
+                        //Inicializamos la celda con el valor que nos pasa el
+                        //TableView:
+                        super.updateItem(item, empty);
+                        
+                        //Preguntamos si el indice (posicion) del objeto
+                        //está dentro del tamaño de la lista:
+                        if (indice >= 0 && indice < table.getItems().size())
+                        {
+                            //Obtenemos el empleado de la posición requerida:
+                            e = table.getItems().get(indice);
+                            
+                            //Establecemos el valor de la celda:
+                            if(e.getEstatus() == 1){
+                                textProperty().set("Activo");
+                            }
+                            else{
+                                textProperty().set("Inactivo");
+                            }
+                                                        
+                        }
+                        else
+                            setText(null);
+                    }
+                };
+            }
+        });
+        
         //Una vez configuradas las columnas, las pondremos en la tabla,
         //pero antes, quítaremos cualquier columna que pudiera tener:
         table.getColumns().clear();
@@ -407,8 +453,11 @@ public class TableAdapterEmpleado
         //Agregamos las columnas a la tabla, en el orden 
         //que deseamos que aparezcan:
         table.getColumns().addAll(  tcNombre, tcApellidoPaterno, tcApellidoMaterno,
-                                    tcGenero, tcRFC, tcDomicilio, tcTelefono, 
-                                    tcNumeroEmpleado, tcPuesto, tcNombreUsuario,
-                                    tcRol);
+                                    tcGenero, tcRFC, 
+                                    tcNumeroEmpleado, tcPuesto, tcEstatus
+                                    );
+        
+        //Invisibles tcDomicilio, tcTelefono, tcRol, tcNombreUsuario
+        
     }
 }

@@ -195,6 +195,7 @@ public class TaskEmpleadoInsert extends Task<Void> {
                 + "&nombreUsuario=" + URLEncoder.encode(empleado.getUsuario().getNombreUsuario(), "UTF-8")
                 + "&contrasenia=" + URLEncoder.encode(empleado.getUsuario().getContrasenia(), "UTF-8")
                 + "&rol=" + URLEncoder.encode(empleado.getUsuario().getRol(), "UTF-8")
+                + "&numeroEmpleado=" + URLEncoder.encode(empleado.getNumeroEmpleado(), "UTF-8")
                 + "&puesto=" + URLEncoder.encode(empleado.getPuesto(), "UTF-8")
                 + "&foto=" + URLEncoder.encode(empleado.getFoto(), "UTF-8")
                 + "&rutaFoto=" + URLEncoder.encode(empleado.getRutaFoto(), "UTF-8");

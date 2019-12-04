@@ -52,7 +52,7 @@
                            <children>
                               <BorderPane layoutY="24.0" prefHeight="690.0" prefWidth="1193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <left>
-                                    <VBox alignment="CENTER" prefHeight="690.0" prefWidth="429.0" spacing="20.0" BorderPane.alignment="CENTER_LEFT">
+                                    <VBox alignment="CENTER" prefHeight="640.0" prefWidth="411.0" spacing="20.0" BorderPane.alignment="CENTER_LEFT">
                                        <children>
                                           <HBox prefHeight="48.0" prefWidth="328.0" spacing="70.0">
                                              <children>
@@ -61,7 +61,10 @@
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtNombreEmpleado" prefHeight="31.0" prefWidth="178.0" />
+                                                <JFXTextField fx:id="txtNombreEmpleado" prefHeight="31.0" prefWidth="178.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></JFXTextField>
                                              </children>
                                           </HBox>
                                           <HBox prefHeight="43.0" prefWidth="328.0" spacing="20.0">
@@ -71,7 +74,10 @@
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtApellidoPEmpleado" prefHeight="31.0" prefWidth="178.0" />
+                                                <JFXTextField fx:id="txtApellidoPEmpleado" prefHeight="31.0" prefWidth="178.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></JFXTextField>
                                              </children>
                                           </HBox>
                                           <HBox prefHeight="54.0" prefWidth="328.0" spacing="10.0">
@@ -81,7 +87,10 @@
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtApellidoMEmpleado" prefHeight="31.0" prefWidth="179.0" />
+                                                <JFXTextField fx:id="txtApellidoMEmpleado" prefHeight="31.0" prefWidth="179.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></JFXTextField>
                                              </children>
                                           </HBox>
                                           <HBox prefHeight="51.0" prefWidth="372.0" spacing="85.0">
@@ -101,7 +110,10 @@
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtContraseniaEmpleado" prefHeight="31.0" prefWidth="178.0" />
+                                                <JFXTextField fx:id="txtContraseniaEmpleado" prefHeight="31.0" prefWidth="178.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></JFXTextField>
                                              </children>
                                           </HBox>
                                           <HBox prefHeight="52.0" prefWidth="993.0" spacing="70.0">
@@ -111,7 +123,10 @@
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtNombreUsuarioEmpleado" prefHeight="31.0" prefWidth="178.0" />
+                                                <JFXTextField fx:id="txtNombreUsuarioEmpleado" prefHeight="31.0" prefWidth="178.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></JFXTextField>
                                              </children>
                                           </HBox>
                                           <HBox prefHeight="51.0" prefWidth="379.0" spacing="70.0">
@@ -121,7 +136,10 @@
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtEstatusEmpleado" prefHeight="31.0" prefWidth="178.0" />
+                                                <JFXTextField fx:id="txtEstatusEmpleado" prefHeight="31.0" prefWidth="178.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></JFXTextField>
                                              </children>
                                           </HBox>
                                           <HBox prefHeight="42.0" prefWidth="379.0" spacing="70.0">
@@ -142,66 +160,84 @@
                                     </VBox>
                                  </left>
                                  <center>
-                                    <VBox alignment="CENTER" prefHeight="690.0" prefWidth="538.0" spacing="30.0" BorderPane.alignment="CENTER">
+                                    <VBox alignment="CENTER" prefHeight="580.0" prefWidth="534.0" spacing="30.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="993.0" spacing="20.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="342.0" spacing="20.0">
                                              <children>
                                                 <Label prefHeight="36.0" prefWidth="115.0" text="Teléfono:">
                                                    <font>
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtTelefonoEmpleado" prefHeight="31.0" prefWidth="191.0" />
+                                                <JFXTextField fx:id="txtTelefonoEmpleado" prefHeight="31.0" prefWidth="191.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></JFXTextField>
                                              </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
                                           </HBox>
-                                          <HBox alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="993.0" spacing="20.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="993.0" spacing="20.0">
                                              <children>
-                                                <Label prefHeight="36.0" prefWidth="117.0" text="Domicilio:">
+                                                <Label prefHeight="36.0" prefWidth="155.0" text="Domicilio:">
                                                    <font>
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtDomicilioEmpleado" prefHeight="31.0" prefWidth="194.0" />
+                                                <JFXTextField fx:id="txtDomicilioEmpleado" prefHeight="37.0" prefWidth="321.0" />
                                              </children>
                                           </HBox>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="993.0" spacing="20.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="993.0" spacing="55.0">
                                              <children>
                                                 <Label text="Puesto:">
                                                    <font>
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtPuestoEmpleado" prefHeight="31.0" prefWidth="191.0" />
+                                                <JFXTextField fx:id="txtPuestoEmpleado" prefHeight="31.0" prefWidth="191.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></JFXTextField>
                                              </children>
                                           </HBox>
-                                          <HBox alignment="CENTER_RIGHT" prefHeight="43.0" prefWidth="993.0" spacing="20.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="993.0" spacing="85.0">
                                              <children>
                                                 <Label text="RFC:">
                                                    <font>
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtRFCEmpleado" prefHeight="31.0" prefWidth="191.0" />
+                                                <JFXTextField fx:id="txtRFCEmpleado" prefHeight="31.0" prefWidth="191.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></JFXTextField>
                                              </children>
                                           </HBox>
-                                          <HBox alignment="BOTTOM_RIGHT" prefHeight="38.0" prefWidth="993.0" spacing="20.0">
+                                          <HBox alignment="BOTTOM_LEFT" prefHeight="38.0" prefWidth="993.0" spacing="90.0">
                                              <children>
                                                 <Label text="Rol:">
                                                    <font>
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtRolEmpleado" prefHeight="31.0" prefWidth="191.0" />
+                                                <JFXTextField fx:id="txtRolEmpleado" prefHeight="31.0" prefWidth="191.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></JFXTextField>
                                              </children>
                                           </HBox>
-                                          <HBox alignment="TOP_RIGHT" prefHeight="43.0" prefWidth="993.0" spacing="20.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="993.0" spacing="20.0">
                                              <children>
-                                                <Label text="No. Empleado:">
+                                                <Label prefHeight="36.0" prefWidth="170.0" text="No. Empleado:">
                                                    <font>
                                                       <Font size="25.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="txtNumEmpleado" prefHeight="31.0" prefWidth="191.0" />
+                                                <JFXTextField fx:id="txtNumEmpleado" prefHeight="39.0" prefWidth="217.0">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></JFXTextField>
                                              </children>
                                           </HBox>
                                           <HBox prefHeight="38.0" prefWidth="379.0" spacing="70.0">
@@ -216,19 +252,19 @@
                                           </HBox>
                                        </children>
                                        <BorderPane.margin>
-                                          <Insets bottom="60.0" />
+                                          <Insets bottom="60.0" left="10.0" />
                                        </BorderPane.margin>
                                        <padding>
-                                          <Insets top="50.0" />
+                                          <Insets left="30.0" top="50.0" />
                                        </padding>
                                     </VBox>
                                  </center>
                                  <right>
-                                    <VBox alignment="CENTER" prefHeight="690.0" prefWidth="375.0" spacing="20.0" BorderPane.alignment="CENTER">
+                                    <VBox alignment="CENTER" prefHeight="640.0" prefWidth="258.0" spacing="20.0" BorderPane.alignment="CENTER">
                                        <children>
                                           <JFXButton fx:id="btnAñadirFoto" style="-fx-background-color: #022375;" text="Seleccionar una foto del empleado" textFill="WHITE" />
                                           <ImageView fx:id="imgvFotoEmpleado" fitHeight="193.0" fitWidth="211.0" pickOnBounds="true" preserveRatio="true" />
-                                          <JFXButton id="buttonModificar" fx:id="btnModificarEmpleado" prefHeight="31.0" prefWidth="107.0" text="Modificar" textFill="WHITE">
+                                          <JFXButton id="buttonModificar" fx:id="btnModificarEmpleado" prefHeight="31.0" prefWidth="107.0" text="Desblquear" textFill="WHITE">
                                              <graphic>
                                                 <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -237,7 +273,7 @@
                                                 </ImageView>
                                              </graphic>
                                           </JFXButton>
-                                          <JFXButton id="buttonGuardar" fx:id="btnGuardarEmpleado" prefHeight="29.0" prefWidth="110.0" text="Guardar" textFill="WHITE">
+                                          <JFXButton id="buttonGuardar" fx:id="btnGuardarEmpleado" prefHeight="29.0" prefWidth="110.0" text="Actualizar" textFill="WHITE">
                                              <graphic>
                                                 <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -256,6 +292,7 @@
                                              </graphic>
                                           </JFXButton>
                                           <JFXButton id="buttonAccion" fx:id="btnRegistrarEmpleado" prefHeight="32.0" prefWidth="112.0" text="Registrar" textFill="WHITE" />
+                                          <JFXButton id="buttonModificar" fx:id="btnLimpiar" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #00ceff;" text="Limipar Campos" textFill="WHITE" />
                                        </children>
                                     </VBox>
                                  </right>

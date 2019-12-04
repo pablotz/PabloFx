@@ -20,12 +20,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.glassware.generacionNumero.GeneracionNumero;
 import org.glassware.model.Empleado;
 import org.glassware.model.Persona;
 import org.glassware.model.Usuario;
-import org.glassware.task.empleado.TableAdapterEmpleado;
+import org.glassware.gui.components.TableAdapterEmpleado;
 import org.glassware.task.empleado.TaskEmpleadoDelete;
 import org.glassware.task.empleado.TaskEmpleadoGetAll;
+import org.glassware.task.empleado.TaskEmpleadoGetAllBuscar;
 import org.glassware.task.empleado.TaskEmpleadoInsert;
 import org.glassware.task.empleado.TaskEmpleadoUpdate;
 
@@ -87,6 +89,9 @@ public class PanelEmpleado {
 
     @FXML
     private JFXButton btnAñadirFoto;
+    
+    @FXML
+    private JFXButton btnLimpiar;
 
     @FXML
     private JFXButton btnRegistrarEmpleado;
@@ -244,9 +249,6 @@ public class PanelEmpleado {
         return txtNumEmpleado;
     }
 
-    public JFXTextField getTxtEstatusEmpleado() {
-        return txtEstatusEmpleado;
-    }
 
     public TableAdapterEmpleado getTableE() {
         return tableE;
@@ -264,11 +266,25 @@ public class PanelEmpleado {
         return txtIdUsuario;
     }
 
+    public JFXButton getBtnLimpiar() {
+        return btnLimpiar;
+    }
+    
+    
+
     public void consultarEmpleados() {
         Thread hilo = null;
         TaskEmpleadoGetAll task = new TaskEmpleadoGetAll(app, this);
 
         hilo = new Thread(task);
+        hilo.start();
+    }
+    
+    public void buscarEmpleados() {
+        Thread hilo = null;
+        TaskEmpleadoGetAllBuscar task2 = new TaskEmpleadoGetAllBuscar(app, this, txtBuscarEmpleado.getText());
+
+        hilo = new Thread(task2);
         hilo.start();
     }
 
@@ -308,10 +324,12 @@ public class PanelEmpleado {
         us.setContrasenia(txtContraseniaEmpleado.getText());
         us.setRol(txtRolEmpleado.getText());
 
-        em.setNumeroEmpleado("QULP000");
+        GeneracionNumero numEm = new GeneracionNumero();
+        
+        em.setNumeroEmpleado(numEm.numeroEmpleado(txtRFCEmpleado.getText()));
         em.setPuesto(txtPuestoEmpleado.getText());
-        em.setFoto("FOTO");
-        em.setRutaFoto("FOTO");
+        em.setFoto(" ");
+        em.setRutaFoto(" ");
 
         em.setPersona(p);
         em.setUsuario(us);
@@ -519,24 +537,24 @@ public class PanelEmpleado {
             txtRolEmpleado.setText("" + e.getUsuario().getRol());
             txtPuestoEmpleado.setText("" + e.getPuesto());
             txtNumEmpleado.setText("" + e.getNumeroEmpleado());
-            txtEstatusEmpleado.setText("" + e.getEstatus());
             txtIdEmpleado.setText("" + e.getIdEmpleado());
             txtIdPersona.setText("" + e.getPersona().getIdPersona());
             txtIdUsuario.setText("" + e.getUsuario().getIdUsuario());
             if (e.getEstatus() == 1) {
-                txtEstatusEmpleado.setText("Activa");
+                txtEstatusEmpleado.setText("Activo");
             } else {
-                txtEstatusEmpleado.setText("Inactiva");
+                txtEstatusEmpleado.setText("Inactivo");
             }
         }
     }
 
     public void seleccionarEmpleado() {
         tblvEmpleados.getSelectionModel().selectedItemProperty().addListener(evt -> {
-            allTabPane.getSelectionModel().select(tabMasterDetails );
+            allTabPane.getSelectionModel().select(tabMasterDetails);
             mostrarDetalleEmpleado();
         });
     }
+    
 
     public void blockTxTLabel() {
         txtNombreEmpleado.setDisable(true);
@@ -596,6 +614,11 @@ public class PanelEmpleado {
     }
 
     public void agregarOyentes() {
+        
+        btnBuscarEmpleado.setOnAction(evt -> {
+            buscarEmpleados();
+        });
+        
         btnModificarEmpleado.setOnAction(evt -> {
             desblockTxTLabel();
         });
@@ -615,6 +638,10 @@ public class PanelEmpleado {
 
         btnCerrarModulo.setOnAction(evt -> {
             app.cerrarModulo();
+        });
+        
+        btnLimpiar.setOnAction(evt -> {
+            limpiarCampos();
         });
     }
 
