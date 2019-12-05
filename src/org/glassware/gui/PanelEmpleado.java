@@ -9,6 +9,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,6 +35,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import org.glassware.generacionNumero.GeneracionNumero;
 import org.glassware.model.Empleado;
 import org.glassware.model.Persona;
@@ -40,6 +46,8 @@ import org.glassware.task.empleado.TaskEmpleadoDelete;
 import org.glassware.task.empleado.TaskEmpleadoGetAll;
 import org.glassware.task.empleado.TaskEmpleadoInsert;
 import org.glassware.task.empleado.TaskEmpleadoUpdate;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -48,6 +56,8 @@ import org.glassware.task.empleado.TaskEmpleadoUpdate;
 public class PanelEmpleado {
 
     List<Empleado> empleados;
+    
+    File imagenEmpleado;
 
     @FXML
     JFXButton btnCerrarModulo;
@@ -280,6 +290,8 @@ public class PanelEmpleado {
     public JFXButton getBtnLimpiar() {
         return btnLimpiar;
     }
+    
+    
 
     public void consultarEmpleados() {
         Thread hilo = null;
@@ -291,6 +303,10 @@ public class PanelEmpleado {
 
     public void setEmpleados(List<Empleado> lista) {
         empleados = lista;
+    }
+
+    public void setImagenEmpleado(File imagenEmpleado) {
+        this.imagenEmpleado = imagenEmpleado;
     }
 
     public void buscarEmpleados() {
@@ -318,7 +334,7 @@ public class PanelEmpleado {
         hilo.start();
     }
 
-    public void addEmpleado() {
+    public void addEmpleado() throws IOException {
         String error = validarDatos();
         if (error != null) {
             app.showAlert(error, error, Alert.AlertType.WARNING);
@@ -358,8 +374,9 @@ public class PanelEmpleado {
 
         em.setNumeroEmpleado(numEm.numeroEmpleado(txtRFCEmpleado.getText()));
         em.setPuesto(txtPuestoEmpleado.getText());
-        em.setFoto(" ");
-        em.setRutaFoto(" ");
+        
+        em.setFoto(encodeToString(imagenEmpleado));
+        em.setRutaFoto(imagenEmpleado.getAbsolutePath());
 
         em.setPersona(p);
         em.setUsuario(us);
@@ -497,18 +514,53 @@ public class PanelEmpleado {
         cmbGeneroEmpleado.getItems().addAll("Hombre", "Mujer", "Otro");
     }
 
-//    private static String encodeFileToBase64Binary(File file) throws FileNotFoundException, IOException {
-//        String encodedfile = null;
-//        FileInputStream fileInputStreamReader = new FileInputStream(file); // TODO Auto-generated catch block
-//        // TODO Auto-generated catch block
-//        byte[] bytes = new byte[(int) file.length()];
-//        fileInputStreamReader.read(bytes);
-//        encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
-//        return encodedfile;
-//    }
+    public static String encodeToString(File imgFile) throws IOException {
+        String imageString = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        BufferedImage imagen = ImageIO.read(imgFile);
+
+        try {
+            ImageIO.write(imagen, "png", bos);
+            byte[] imageBytes = bos.toByteArray();
+
+            BASE64Encoder encoder = new BASE64Encoder();
+            imageString = encoder.encode(imageBytes);
+
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(imageString);
+        return imageString;
+    }
+
+    public static Image decodeToImage(String imageString) {
+        Image imagen = null;
+        BufferedImage image = null;
+        
+        byte[] imageByte;
+        try {
+            BASE64Decoder decoder = new BASE64Decoder();
+            imageByte = decoder.decodeBuffer(imageString);
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+            image = ImageIO.read(bis);
+            bis.close();
+
+            File outputfile = new File("image.png");
+            ImageIO.write(image, "png", outputfile);
+            
+            image = ImageIO.read(outputfile);
+            
+            imagen = new Image(outputfile.toURI().toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return imagen;
+    }
 
     public void agregarFoto() {
-        btnAñadirFoto.setOnAction(event -> {
+            File imgFile = null;
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Buscar Imagen");
 
@@ -521,14 +573,15 @@ public class PanelEmpleado {
 
             Stage window = new Stage();
             // Obtener la imagen seleccionada
-            File imgFile = fileChooser.showOpenDialog(window);
+            imgFile = fileChooser.showOpenDialog(window);
 
             // Mostar la imagen
             if (imgFile != null) {
                 Image image = new Image("file:" + imgFile.getAbsolutePath());
+
                 imgvFotoEmpleado.setImage(image);
             }
-        });
+            setImagenEmpleado(imgFile);
     }
 
     public void limpiarCampos() {
@@ -548,6 +601,8 @@ public class PanelEmpleado {
         txtIdPersona.setText("");
         txtIdUsuario.setText("");
         txtIdEmpleado.setText("");
+        Image img = null;
+        imgvFotoEmpleado.setImage(img);
     }
 
     public void mostrarDetalleEmpleado() {
@@ -580,6 +635,8 @@ public class PanelEmpleado {
             txtIdEmpleado.setText("" + e.getIdEmpleado());
             txtIdPersona.setText("" + e.getPersona().getIdPersona());
             txtIdUsuario.setText("" + e.getUsuario().getIdUsuario());
+
+            imgvFotoEmpleado.setImage(decodeToImage(e.getFoto()));
             if (e.getEstatus() == 1) {
                 txtEstatusEmpleado.setText("Activo");
             } else {
@@ -641,8 +698,6 @@ public class PanelEmpleado {
 
         noVisisbleLabel();
 
-        agregarFoto();
-
         consultarEmpleados();
         listaEmpleados();
         tableE.adapt(tblvEmpleados);
@@ -654,7 +709,11 @@ public class PanelEmpleado {
     }
 
     public void agregarOyentes() {
-
+        
+        btnAñadirFoto.setOnAction(evt -> {
+            agregarFoto();
+        });
+        
         btnBuscarEmpleado.setOnAction(evt -> {
             if (txtBuscarEmpleado.getText().equals("")) {
                 consultarEmpleados();
@@ -673,7 +732,11 @@ public class PanelEmpleado {
         });
 
         btnRegistrarEmpleado.setOnAction(evt -> {
-            addEmpleado();
+            try {
+                addEmpleado();
+            } catch (IOException ex) {
+                Logger.getLogger(PanelEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
         btnGuardarEmpleado.setOnAction(evt -> {
