@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.glassware.task.sucursal;
+package org.glassware.task.empleado;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,25 +16,25 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
-import org.glassware.model.Sucursal;
 import org.glassware.commons.MySPACommons;
 import org.glassware.commons.MySPAHTTPUtils;
-import org.glassware.gui.PanelSala;
+import org.glassware.gui.PanelEmpleado;
 import org.glassware.gui.PanelSucursal;
 import org.glassware.gui.WindowMain;
+import org.glassware.model.Empleado;
 
 /**
- * Esta clase nos permite consultar todos los registros de las sucursales
- * almacenadas en la BD, a través del uso de servicios REST.
+ * Esta clase nos permite consultar todos los registros de las empleados
+ almacenadas en la BD, a través del uso de servicios REST.
  *
  * @author LiveGrios
  */
-public class TaskSucursalGetAll extends Task<Void> {
+public class TaskEmpleadoGetAll extends Task<Void> {
 
     // El Panel que contiene todos los controles visuales
-    // que manipulan el catálogo y los datos de las sucursales:
-    PanelSucursal panelSucursal;
-   
+    // que manipulan el catálogo y los datos de las empleados:
+    PanelEmpleado panelEmpleado;
+
     // Necesitamos el objeto que hace referencia a la aplicación:
     WindowMain app;
 
@@ -42,21 +42,21 @@ public class TaskSucursalGetAll extends Task<Void> {
     HttpURLConnection connHttp;
 
     // La lista dinámica que contendrá objetos de tipo Sucursal:
-    List<Sucursal> sucursales;
+    List<Empleado> empleados;
 
     // Guardamos la excepción, si es que ocurre una,
     // durante la ejecución paralela de la tarea:
     Exception resultException;
 
-    public TaskSucursalGetAll(WindowMain app, PanelSucursal panelSucursal) {
+    public TaskEmpleadoGetAll(WindowMain app, PanelEmpleado panelEmpleado) {
         this.app = app;
-        this.panelSucursal = panelSucursal;
+        this.panelEmpleado = panelEmpleado;
     }
 
     /**
      * Este método se ejecutará asíncronamente de manera paralela y hará la
-     * consulta al servicio REST que devolverá los registros de sucursales como
-     * un JSON array.
+ consulta al servicio REST que devolverá los registros de empleados como
+ un JSON array.
      *
      * @return
      * @throws Exception
@@ -74,14 +74,14 @@ public class TaskSucursalGetAll extends Task<Void> {
 
     /**
      * Este método se conecta al servicio REST que devolverá el catálogo de
-     * sucursales como un JSON array que posteriormente será convertido en una
-     * List<Sucursal> de Java.
+ empleados como un JSON array que posteriormente será convertido en una
+ List<Sucursal> de Java.
      *
      * @throws Exception
      */
     private void getAll() throws Exception {
         // Establecemos la ruta del servicio REST:
-        String server = MySPACommons.URL_SERVER + "/api/Sucursal/mostrar";
+        String server = MySPACommons.URL_SERVER + "/api/Empleado/mostrar";
 
         // Generamos una URL con la ruta anteriormente establecida:
         URL url = new URL(server);
@@ -125,15 +125,14 @@ public class TaskSucursalGetAll extends Task<Void> {
             connHttp.disconnect();
 
             // Convertimos el texto JSON en una lista dinámica de Java:
-            sucursales = parseSucursales(responseContent);
+            empleados = parseEmpleados(responseContent);
 
-            // Actualizamos la tabla (el control visual TableView) de sucursales
+            // Actualizamos la tabla (el control visual TableView) de empleados
             // dentro del hilo de JavaFX, porque de no hacerlo allí, se generará
             // una excepción:
             Platform.runLater(() -> {
-                panelSucursal.getTblvSucursales().setItems(FXCollections.observableArrayList(sucursales));
+                panelEmpleado.getTblvEmpleados().setItems(FXCollections.observableArrayList(empleados));
             });
-
         } else // Si hubo un error, nos desconectamos del servidor y 
         // mostramos el mensaje correspondiente dentro del hilo
         // de JavaFX:            
@@ -150,29 +149,29 @@ public class TaskSucursalGetAll extends Task<Void> {
     }
 
     /**
-     * Este método convierte una cadena JSON en una lista de sucursales Java de
-     * tipo ArrayList<Sucursal>.
+     * Este método convierte una cadena JSON en una lista de empleados Java de
+ tipo ArrayList<Sucursal>.
      *
      * @param strJson
      * @return
      * @throws Exception
      */
-    private List<Sucursal> parseSucursales(String strJson) throws Exception {
+    private List<Empleado> parseEmpleados(String strJson) throws Exception {
         // Esta es la lista que contendrá los objetos de tipo Sucursal:
-        List<Sucursal> sucursales = new ArrayList<>();
+        List<Empleado> empleados = new ArrayList<>();
 
         // Con este objeto le vamos a indicar a Gson que queremos convertir
         // el contenido JSON en una List<Sucursal>:
-        Type listType = new TypeToken<List<Sucursal>>() {
+        Type listType = new TypeToken<List<Empleado>>() {
         }.getType();
 
         // Creamos un objeto de tipo Gson:
         Gson gson = new Gson();
 
-        // Convertimos la cadena JSON en una lista de sucursales de Java:
-        sucursales = gson.fromJson(strJson, listType);
+        // Convertimos la cadena JSON en una lista de empleados de Java:
+        empleados = gson.fromJson(strJson, listType);
 
         // Devolvemos la lista creada:
-        return sucursales;
+        return empleados;
     }
 }

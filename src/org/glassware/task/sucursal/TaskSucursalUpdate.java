@@ -52,7 +52,7 @@ public class TaskSucursalUpdate extends Task<Void>
     
     private void save() throws Exception
     {
-        String server = MySPACommons.URL_SERVER + "/api/sucursal/update?";
+        String server = MySPACommons.URL_SERVER + "/api/Sucursal/update";
         String postParams = buildPOSTParams();
         JsonParser jp = new JsonParser();
         URL url = new URL(server);
@@ -135,11 +135,12 @@ public class TaskSucursalUpdate extends Task<Void>
     
     private String buildPOSTParams() throws Exception
     {        
-        String params = "id=" + sucursal.getIdSucursal()+ 
+        String params = "idSucursal=" + sucursal.getIdSucursal()+ 
                         "&nombre=" + URLEncoder.encode(sucursal.getNombre(), "UTF-8") + 
                         "&domicilio=" + URLEncoder.encode(sucursal.getDomicilio(), "UTF-8")+
                         "&latitud=" + sucursal.getLatitud()+ 
                         "&longitud=" + sucursal.getLongitud();
+                        
         return params;
     }
     

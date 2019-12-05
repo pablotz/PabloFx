@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.glassware.task.sucursal;
+package org.glassware.task.empleado;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -13,22 +13,22 @@ import java.net.URLEncoder;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
-import org.glassware.model.Sucursal;
 import org.glassware.commons.MySPACommons;
 import org.glassware.commons.MySPAHTTPUtils;
-import org.glassware.gui.PanelSucursal;
+import org.glassware.gui.PanelEmpleado;
 import org.glassware.gui.WindowMain;
+import org.glassware.model.Empleado;
 
 /**
  * Esta clase sirve para insertar un nuevo registro de Sucursal.
  *
  * @author LiveGrios
  */
-public class TaskSucursalInsert extends Task<Void> {
+public class TaskEmpleadoInsert extends Task<Void> {
 
     // El panel que contiene los controles visuales
     // relacionados con el modulo Sucursal:
-    PanelSucursal panelSucursal;
+    PanelEmpleado panelEmpleado;
 
     // La aplicación:
     WindowMain app;
@@ -40,24 +40,24 @@ public class TaskSucursalInsert extends Task<Void> {
     // La conexión http con el servicio REST:
     HttpURLConnection connHttp;
 
-    // El objeto que contiene todos los datos de la sucursal:
-    Sucursal sucursal;
+    // El objeto que contiene todos los datos de la empleado:
+    Empleado empleado;
 
     // Guardamos la excepción, si es que ocurre una,
     // durante la ejecución paralela de la tarea:
     Exception resultException;
 
-    public TaskSucursalInsert(WindowMain app,
-            PanelSucursal panelSucursal,
-            Sucursal sucursal) {
+    public TaskEmpleadoInsert(WindowMain app,
+            PanelEmpleado panelEmpleado,
+            Empleado empleado) {
         this.app = app;
-        this.panelSucursal = panelSucursal;
-        this.sucursal = sucursal;
+        this.panelEmpleado = panelEmpleado;
+        this.empleado = empleado;
     }
 
     /**
      * Este método se ejecutará asíncronamente de manera paralela en donde se
-     * invocará el servicio REST que insertará un nuevo registro de sucursal.
+     * invocará el servicio REST que insertará un nuevo registro de empleado.
      *
      * @return
      * @throws Exception
@@ -81,7 +81,7 @@ public class TaskSucursalInsert extends Task<Void> {
      */
     private void save() throws Exception {
         // Establecemos la ruta del servicio REST:
-        String server = MySPACommons.URL_SERVER + "/api/Sucursal/insert?";
+        String server = MySPACommons.URL_SERVER + "/api/Empleado/insert?";
 
         // Generamos una URL con la ruta anteriormente establecida:
         URL url = new URL(server);
@@ -170,7 +170,7 @@ public class TaskSucursalInsert extends Task<Void> {
             if (jso.has("result")) {
                 if (jso.get("result").getAsString().toLowerCase().equals("exito")) {
                     app.showAlert("Movimiento realizado", "Se insertó el registro correctamente", Alert.AlertType.INFORMATION);
-                    panelSucursal.consultarSucursales();
+                    panelEmpleado.consultarEmpleados();
                 } else {
                     app.showAlert("Error", jso.get("result").getAsString(), Alert.AlertType.WARNING);
                 }
@@ -185,10 +185,19 @@ public class TaskSucursalInsert extends Task<Void> {
     }
 
     private String buildPOSTParams() throws Exception {
-        String params = "nombre=" + URLEncoder.encode(sucursal.getNombre(), "UTF-8")
-                + "&domicilio=" + URLEncoder.encode(sucursal.getDomicilio(), "UTF-8")
-                + "&latitud=" + sucursal.getLatitud()
-                + "&longitud=" + sucursal.getLongitud();
+        String params = "nombre=" + URLEncoder.encode(empleado.getPersona().getNombre(), "UTF-8")
+                + "&apellidoPaterno=" + URLEncoder.encode(empleado.getPersona().getApellidoPaterno(), "UTF-8")
+                + "&apellidoMaterno=" + URLEncoder.encode(empleado.getPersona().getApellidoMaterno(), "UTF-8")
+                + "&genero=" + URLEncoder.encode(empleado.getPersona().getGenero(), "UTF-8")
+                + "&domicilio=" + URLEncoder.encode(empleado.getPersona().getDomicilio(), "UTF-8")
+                + "&telefono=" + URLEncoder.encode(empleado.getPersona().getTelefono(), "UTF-8")
+                + "&rfc=" + URLEncoder.encode(empleado.getPersona().getRfc(), "UTF-8")
+                + "&nombreUsuario=" + URLEncoder.encode(empleado.getUsuario().getNombreUsuario(), "UTF-8")
+                + "&contrasenia=" + URLEncoder.encode(empleado.getUsuario().getContrasenia(), "UTF-8")
+                + "&rol=" + URLEncoder.encode(empleado.getUsuario().getRol(), "UTF-8")
+                + "&puesto=" + URLEncoder.encode(empleado.getPuesto(), "UTF-8")
+                + "&foto=" + URLEncoder.encode(empleado.getFoto(), "UTF-8")
+                + "&rutaFoto=" + URLEncoder.encode(empleado.getRutaFoto(), "UTF-8");
         return params;
     }
 

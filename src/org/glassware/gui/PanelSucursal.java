@@ -5,8 +5,10 @@
  */
 package org.glassware.gui;
 
+import javafx.scene.control.Tab;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +31,7 @@ public class PanelSucursal {
 
     @FXML
     JFXButton btnCerrarModulo;
+
     WindowMain app;
 
     @FXML
@@ -45,6 +48,9 @@ public class PanelSucursal {
 
     @FXML
     private JFXButton btnModificarSucursal;
+
+    @FXML
+    private JFXTextField txtIdSucursal;
 
     @FXML
     private JFXButton btnGuardarSucursal;
@@ -68,10 +74,13 @@ public class PanelSucursal {
     private TableView<Sucursal> tblvSucursales;
 
     @FXML
-    private JFXTextField txtIdSucursal;
-    
+    private JFXTabPane tabpSucursales;
+
     @FXML
-    private JFXComboBox cmbEstadoSucursal;
+    private Tab tabRegistrarSucursal;
+
+    @FXML
+    private Tab tabSucursales;
 
     FXMLLoader fxmll;
 
@@ -154,10 +163,6 @@ public class PanelSucursal {
     public JFXTextField getTxtIdSucursal() {
         return txtIdSucursal;
     }
-    
-    private void llenarComboBox() {
-        cmbEstadoSucursal.getItems().addAll("Activo", "Inactivo");
-    }
 
     public void mostrarDetalleSucursal() {
         Sucursal su = tblvSucursales.getSelectionModel().getSelectedItem();
@@ -171,7 +176,7 @@ public class PanelSucursal {
             txtDomicilioSucursal.setText("" + su.getDomicilio());
             txtLatitudSucursal.setText("" + su.getLatitud());
             txtLongitudSucursal.setText("" + su.getLongitud());
-            
+
         }
     }
 
@@ -204,22 +209,6 @@ public class PanelSucursal {
 
     }
 
-    public String validarDatos() {
-        String error = null;
-        if (txtNombreSucursal.getText().trim().isEmpty()) {
-            error = "Debe de especificar un nombre de producto";
-        } else if (txtDomicilioSucursal.getText().trim().isEmpty()) {
-            error = "Debe de especificar la marca del producto";
-        } else {
-            try {
-                Float.valueOf(txtLatitudSucursal.getText().trim());
-            } catch (Exception e) {
-                error = "Captura solo numeros para el precio";
-            }
-        }
-        return error;
-    }
-
     public void consultarSucursales() {
         Thread hilo = null;
         TaskSucursalGetAll task = new TaskSucursalGetAll(app, this);
@@ -229,23 +218,30 @@ public class PanelSucursal {
 
     }
 
-    public String validarDatosSala() {
+    public String validarDatos() {
         String error = null;
 
         if (txtNombreSucursal.getText().trim().isEmpty()) {
-            error = "Debe especificar un nombre de sala";
+            error = "Debe especificar un nombre de sucursal";
         } else if (txtDomicilioSucursal.getText().trim().isEmpty()) {
-            error = "Debe especificar una descripción";
+            error = "Debe especificar un domicilio de la sucursal";
         } else if (txtLatitudSucursal.getText().trim().isEmpty()) {
-            error = "Debe espicificar una latitud a la sala";
+            error = "Debe especificar la latitud de la sucursal";
         } else if (txtLongitudSucursal.getText().trim().isEmpty()) {
-            error = "Debe espicificar una longitud a la sala";
+            error = "Debe especificar la longitud de la sucursal";
+        } else {
+            try {
+                Double.valueOf(txtLatitudSucursal.getText().trim());
+                Double.valueOf(txtLongitudSucursal.getText().trim());
+            } catch (NumberFormatException nfe) {
+                error = "Captura solo numero para latitud y longitud";
+            }
         }
         return error;
     }
 
     public void addSucursal() {
-        String error = validarDatosSala();
+        String error = validarDatos();
 
         if (error != null) {
             app.showAlert("Datos incorrectos", error, Alert.AlertType.WARNING);
@@ -261,7 +257,6 @@ public class PanelSucursal {
             Thread hilo = null;
 
             TaskSucursalInsert task2 = new TaskSucursalInsert(app, this, su);
-            System.out.println("Insertar fjfjfjf");
 
             hilo = new Thread(task2);
             hilo.start();
@@ -269,7 +264,7 @@ public class PanelSucursal {
 
     }
 
-    public void updateProducto() {
+    public void updateSucursal() {
         String error = validarDatos();
         if (error != null) {
             app.showAlert("Datos Incorectos", error, Alert.AlertType.WARNING);
@@ -277,7 +272,7 @@ public class PanelSucursal {
         }
         Thread hilo = null;
         Sucursal su = new Sucursal();
-        
+
         su.setIdSucursal(Integer.parseInt(txtIdSucursal.getText()));
         su.setNombre(txtNombreSucursal.getText());
         su.setDomicilio(txtDomicilioSucursal.getText());
@@ -290,35 +285,56 @@ public class PanelSucursal {
 
     }
 
+    public void bloquearComponentes() {
+        txtNombreSucursal.setDisable(true);
+        txtDomicilioSucursal.setDisable(true);
+        txtLatitudSucursal.setDisable(true);
+        txtLongitudSucursal.setDisable(true);
+
+    }
+
     TableAdapterSucursal tableA = new TableAdapterSucursal();
 
     public void inicializar() throws Exception {
 
         fxmll.load();
+
         agrgarOyentes();
         consultarSucursales();
-        llenarComboBox();
+//        llenarComboBox();
+        txtIdSucursal.setVisible(false);
         tableA.adapt(tblvSucursales);
 
     }
 
     public void agrgarOyentes() {
         tblvSucursales.getSelectionModel().selectedItemProperty().addListener(evt -> {
+            tabpSucursales.getSelectionModel().select(tabRegistrarSucursal);
             mostrarDetalleSucursal();
-        });
-
-        btnCerrarModulo.setOnAction(evt -> {
-            app.cerrarModulo();
+            bloquearComponentes();
         });
 
         btnRegistrarSucursal.setOnAction(evt -> {
             addSucursal();
+        });
+        btnCerrarModulo.setOnAction(evt -> {
+            app.cerrarModulo();
         });
 
         btnEliminarSucursal.setOnAction(evt -> {
             deleteSucursal();
         });
 
+        btnGuardarSucursal.setOnAction(evt -> {
+            updateSucursal();
+        });
+
+        btnModificarSucursal.setOnAction(evt -> {
+            txtNombreSucursal.setDisable(false);
+            txtDomicilioSucursal.setDisable(false);
+            txtLatitudSucursal.setDisable(false);
+            txtLongitudSucursal.setDisable(false);
+        });
     }
 
 }

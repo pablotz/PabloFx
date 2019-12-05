@@ -124,7 +124,7 @@ public class TaskProductoUpdate extends Task<Void>
                         "&nombre=" + URLEncoder.encode(producto.getNombre(), "UTF-8") + 
                         "&marca=" + URLEncoder.encode(producto.getMarca(), "UTF-8")+
                         "&precioUso=" + producto.getPrecioUso();
-        System.out.println(producto.getIdProducto());
+        
         return params;
     }
     

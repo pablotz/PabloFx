@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/PabloFx/src/org/glassware/task/sucursal/TaskSucursalDelete.java</file>
             <file>file:/D:/PabloFx/src/org/glassware/gui/PanelSala.java</file>
-            <file>file:/D:/PabloFx/src/org/glassware/gui/components/TableAdapterSucursal.java</file>
             <file>file:/D:/PabloFx/src/org/glassware/commons/MySPACommons.java</file>
-            <file>file:/D:/PabloFx/src/org/glassware/gui/PanelSucursal.java</file>
+            <file>file:/D:/PabloFx/src/org/glassware/task/sala/TaskSalasGetAllSucursales.java</file>
         </group>
     </open-files>
 </project-private>

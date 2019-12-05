@@ -82,9 +82,13 @@
                                  </font>
                               </JFXButton>
                               <ImageView fx:id="imgvFotoSala" fitHeight="294.0" fitWidth="316.0" layoutX="14.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" />
-                              <JFXComboBox fx:id="cmbEstatus" layoutX="522.0" layoutY="440.0" prefHeight="25.0" prefWidth="133.0" promptText="Activo o inactivo" />
                               <JFXComboBox fx:id="cmbSucursal" layoutX="531.0" layoutY="531.0" prefHeight="25.0" prefWidth="199.0" promptText="Nombre sucursal" />
                               <JFXTextField fx:id="txtIdSala" layoutX="935.0" layoutY="490.0" prefHeight="25.0" prefWidth="56.0" />
+                              <JFXTextField fx:id="txtEstatusSala" layoutX="531.0" layoutY="425.0" prefHeight="39.0" prefWidth="82.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </JFXTextField>
                                     </children>
                                 </AnchorPane>
                         <Label layoutX="176.0" layoutY="62.0" prefHeight="47.0" prefWidth="68.0" text="Foto">

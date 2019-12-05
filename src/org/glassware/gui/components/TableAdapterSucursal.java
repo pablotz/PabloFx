@@ -5,6 +5,7 @@
  */
 package org.glassware.gui.components;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -34,6 +35,7 @@ public class TableAdapterSucursal
         
         //Para propiedades directas, del objeto podemos utilizar:
         tcidSucursal.setCellValueFactory(new PropertyValueFactory<>("idSucursal"));
+        tcidSucursal.setVisible(false);
         tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tcDomicilio.setCellValueFactory(new PropertyValueFactory<>("domicilio"));
         tcLongitud.setCellValueFactory(new PropertyValueFactory<>("longitud"));
@@ -43,4 +45,6 @@ public class TableAdapterSucursal
         table.getColumns().addAll(tcidSucursal, tcNombre, tcDomicilio,
                                   tcLongitud, tcLatitud, tcStatus);
     }
+    
+   
 }

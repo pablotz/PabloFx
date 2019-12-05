@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.glassware.task.sucursal;
+package org.glassware.task.sala;
 
+import org.glassware.task.sucursal.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -29,12 +30,13 @@ import org.glassware.gui.WindowMain;
  *
  * @author LiveGrios
  */
-public class TaskSucursalGetAll extends Task<Void> {
+public class TaskSalasGetAllSucursales extends Task<Void> {
 
     // El Panel que contiene todos los controles visuales
     // que manipulan el catálogo y los datos de las sucursales:
-    PanelSucursal panelSucursal;
-   
+    
+    PanelSala panelSala;
+
     // Necesitamos el objeto que hace referencia a la aplicación:
     WindowMain app;
 
@@ -48,9 +50,9 @@ public class TaskSucursalGetAll extends Task<Void> {
     // durante la ejecución paralela de la tarea:
     Exception resultException;
 
-    public TaskSucursalGetAll(WindowMain app, PanelSucursal panelSucursal) {
+    public TaskSalasGetAllSucursales(WindowMain app, PanelSala panelSala) {
         this.app = app;
-        this.panelSucursal = panelSucursal;
+        this.panelSala = panelSala;
     }
 
     /**
@@ -131,7 +133,7 @@ public class TaskSucursalGetAll extends Task<Void> {
             // dentro del hilo de JavaFX, porque de no hacerlo allí, se generará
             // una excepción:
             Platform.runLater(() -> {
-                panelSucursal.getTblvSucursales().setItems(FXCollections.observableArrayList(sucursales));
+                panelSala.setSucursales(sucursales);
             });
 
         } else // Si hubo un error, nos desconectamos del servidor y 
@@ -175,4 +177,6 @@ public class TaskSucursalGetAll extends Task<Void> {
         // Devolvemos la lista creada:
         return sucursales;
     }
+    
+    
 }
