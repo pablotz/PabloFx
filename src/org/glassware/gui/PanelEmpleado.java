@@ -389,7 +389,7 @@ public class PanelEmpleado {
         hilo.start();
     }
 
-    public void updateEmpleado() {
+    public void updateEmpleado() throws IOException {
         String error = validarDatosUpdate();
         if (error != null) {
             app.showAlert(error, error, Alert.AlertType.WARNING);
@@ -427,8 +427,8 @@ public class PanelEmpleado {
 
         em.setIdEmpleado(Integer.parseInt(txtIdEmpleado.getText()));
         em.setPuesto(txtPuestoEmpleado.getText());
-        em.setFoto(" ");
-        em.setRutaFoto(" ");
+        em.setFoto(encodeToString(imagenEmpleado));
+        em.setRutaFoto(imagenEmpleado.getAbsolutePath());
         em.setPersona(p);
         em.setUsuario(us);
         limpiarCampos();
@@ -664,6 +664,8 @@ public class PanelEmpleado {
         txtPuestoEmpleado.setDisable(true);
         txtRolEmpleado.setDisable(true);
         txtContraseniaEmpleado.setDisable(true);
+        btnAñadirFoto.setDisable(true);
+        cmbGeneroEmpleado.setDisable(true);
     }
 
     public void desblockTxTLabel() {
@@ -677,6 +679,8 @@ public class PanelEmpleado {
         txtPuestoEmpleado.setDisable(false);
         txtRolEmpleado.setDisable(false);
         //txtContraseniaEmpleado.setDisable(false);
+        btnAñadirFoto.setDisable(false);
+        cmbGeneroEmpleado.setDisable(false);
     }
 
     TableAdapterEmpleado tableE = new TableAdapterEmpleado();
@@ -740,7 +744,11 @@ public class PanelEmpleado {
         });
 
         btnGuardarEmpleado.setOnAction(evt -> {
-            updateEmpleado();
+            try {
+                updateEmpleado();
+            } catch (IOException ex) {
+                Logger.getLogger(PanelEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            }
             txtContraseniaEmpleado.setDisable(false);
         });
 
