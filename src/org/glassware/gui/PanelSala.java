@@ -32,6 +32,8 @@ import org.glassware.task.sucursal.*;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.image.ImageView;
 
 /**
@@ -64,6 +66,9 @@ public class PanelSala {
 
     @FXML
     private JFXButton btnSelectFotoSala;
+
+    @FXML
+    private JFXButton btnLimpiar;
 
     @FXML
     private JFXTextField txtNombreSala;
@@ -102,12 +107,16 @@ public class PanelSala {
 
     List<Sucursal> sucursales;
 
-    FileChooser fileChooser = new FileChooser();
+    File imagenSala;
 
     public PanelSala(WindowMain app) {
         this.app = app;
         fxmll = new FXMLLoader(System.class.getResource("/org/glassware/gui/fxml/panel_salas.fxml"));
         fxmll.setController(this);
+    }
+
+    public void setImagenSala(File imagenSala) {
+        this.imagenSala = imagenSala;
     }
 
     public Node getRoot() {
@@ -216,7 +225,7 @@ public class PanelSala {
         return error;
     }
 
-    public void addSala() {
+    public void addSala() throws IOException {
         String error = validarDatosSala();
 
         if (error != null) {
@@ -230,8 +239,8 @@ public class PanelSala {
         sa.setDescripcion(txtDescripcionSala.getText());
         su.setIdSucursal(cmbSucursal.getSelectionModel().getSelectedIndex());
         sa.setSucursal(su);
-        sa.setFoto("");
-        sa.setRutaFoto("");
+        sa.setFoto(encodeToString(imagenSala));
+        sa.setRutaFoto(imagenSala.getAbsolutePath());
 
         Thread hilo = null;
 
@@ -259,7 +268,6 @@ public class PanelSala {
             txtIdSala.setVisible(false);
             txtNombreSala.setText("" + sa.getNombre());
             txtDescripcionSala.setText("" + sa.getDescripcion());
-
             txtIdSala.setVisible(false);
 
             for (int i = 0; i < sucursales.size(); i++) {
@@ -275,12 +283,6 @@ public class PanelSala {
             }
             if (estatus == 2) {
                 txtEstatusSala.setText("Inactivo");
-            }
-
-            if (sa.getEstatus() == 1) {
-
-            } else {
-
             }
 
         }
@@ -332,6 +334,11 @@ public class PanelSala {
 
         txtDescripcionSala.setText("");
         txtNombreSala.setText("");
+        txtEstatusSala.setText("");
+        txtIdSala.setText("");
+        cmbSucursal.setValue("");
+        Image img = null;
+        imgvFotoSala.setImage(img);
     }
 
     public void inicializar() throws Exception {
@@ -365,8 +372,10 @@ public class PanelSala {
         return imageString;
     }
 
-    public static BufferedImage decodeToImage(String imageString) {
+    public static Image decodeToImage(String imageString) {
+        Image imagen = null;
         BufferedImage image = null;
+
         byte[] imageByte;
         try {
             BASE64Decoder decoder = new BASE64Decoder();
@@ -374,47 +383,49 @@ public class PanelSala {
             ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
             image = ImageIO.read(bis);
             bis.close();
+
+            File outputfile = new File("image.png");
+            ImageIO.write(image, "png", outputfile);
+
+            image = ImageIO.read(outputfile);
+
+            imagen = new Image(outputfile.toURI().toString());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return image;
+        return imagen;
     }
 
     public void agregarFoto() {
-        btnSelectFotoSala.setOnAction(event -> {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Buscar Imagen");
+        File imgFile = null;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar Imagen");
 
-            // Agregar filtros para facilitar la busqueda
-            fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("All Images", "."),
-                    new FileChooser.ExtensionFilter("JPG", ".jpg"),
-                    new FileChooser.ExtensionFilter("PNG", ".png")
-            );
+        // Agregar filtros para facilitar la busqueda
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
 
-            Stage window = new Stage();
-            // Obtener la imagen seleccionada
-            File imgFile = fileChooser.showOpenDialog(window);
+        Stage window = new Stage();
+        // Obtener la imagen seleccionada
+        imgFile = fileChooser.showOpenDialog(window);
 
-            // Mostar la imagen
-            if (imgFile != null) {
-                Image image = new Image("file:" + imgFile.getAbsolutePath());
+        // Mostar la imagen
+        if (imgFile != null) {
+            Image image = new Image("file:" + imgFile.getAbsolutePath());
 
-                imgvFotoSala.setImage(image);
-                try {
-                    encodeToString(imgFile);
-                } catch (IOException ex) {
-
-                }
-            }
-        });
+            imgvFotoSala.setImage(image);
+        }
+        setImagenSala(imgFile);
     }
 
     public void agregarOyentes() {
         tblSalas.getSelectionModel().selectedItemProperty().addListener(evt -> {
             tabpSalas.getSelectionModel().select(tabRegistrarSala);
             mostrarDetalleSala();
-
             txtNombreSala.setDisable(true);
             txtDescripcionSala.setDisable(true);
             cmbSucursal.setDisable(true);
@@ -426,7 +437,11 @@ public class PanelSala {
         });
 
         btnRegistrarSala.setOnAction(evt -> {
-            addSala();
+            try {
+                addSala();
+            } catch (IOException ex) {
+                Logger.getLogger(PanelSala.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
         btnEliminarSala.setOnAction(evt -> {
@@ -441,6 +456,10 @@ public class PanelSala {
 
         btnSelectFotoSala.setOnAction(evt -> {
             agregarFoto();
+        });
+
+        btnLimpiar.setOnAction(evt -> {
+            limpiarCampos();
         });
 
     }

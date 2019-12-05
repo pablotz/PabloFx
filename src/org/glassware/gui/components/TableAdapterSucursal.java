@@ -41,6 +41,7 @@ public class TableAdapterSucursal
         tcLongitud.setCellValueFactory(new PropertyValueFactory<>("longitud"));
         tcLatitud.setCellValueFactory(new PropertyValueFactory<>("latitud"));
         tcStatus.setCellValueFactory(new PropertyValueFactory<>("estatus"));
+        tcStatus.setVisible(false);
         
         table.getColumns().addAll(tcidSucursal, tcNombre, tcDomicilio,
                                   tcLongitud, tcLatitud, tcStatus);

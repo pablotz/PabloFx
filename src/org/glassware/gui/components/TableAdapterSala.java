@@ -37,6 +37,8 @@ public class TableAdapterSala {
         tcDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tcEstatus.setCellValueFactory(new PropertyValueFactory<>("estatus"));
         tcSucursal.setCellValueFactory(new PropertyValueFactory<>("sucursal"));
+        tcEstatus.setVisible(false);
+        tcSucursal.setVisible(false);
 
         table.getColumns().clear();
         table.getColumns().addAll(tcidSala, tcNombre, tcDescripcion, tcEstatus, tcSucursal);

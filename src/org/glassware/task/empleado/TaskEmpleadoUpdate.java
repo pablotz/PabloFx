@@ -1,5 +1,6 @@
 package org.glassware.task.empleado;
 
+import org.glassware.task.sucursal.*;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.net.HttpURLConnection;
@@ -7,9 +8,11 @@ import java.net.URL;
 import java.net.URLEncoder;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
+import org.glassware.model.Sucursal;
 import org.glassware.commons.MySPACommons;
 import org.glassware.commons.MySPAHTTPUtils;
 import org.glassware.gui.PanelEmpleado;
+import org.glassware.gui.PanelSucursal;
 import org.glassware.gui.WindowMain;
 import org.glassware.model.Empleado;
 

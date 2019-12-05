@@ -82,6 +82,9 @@ public class PanelSucursal {
     @FXML
     private Tab tabSucursales;
 
+    @FXML
+    private JFXTextField txtEstatusSucursal;
+
     FXMLLoader fxmll;
 
     TaskSucursalGetAll task;
@@ -176,6 +179,15 @@ public class PanelSucursal {
             txtDomicilioSucursal.setText("" + su.getDomicilio());
             txtLatitudSucursal.setText("" + su.getLatitud());
             txtLongitudSucursal.setText("" + su.getLongitud());
+
+            int estatus = su.getEstatus();
+
+            if (estatus == 1) {
+                txtEstatusSucursal.setText("Activo");
+            }
+            if (estatus == 2) {
+                txtEstatusSucursal.setText("Inactivo");
+            }
 
         }
     }
@@ -301,7 +313,7 @@ public class PanelSucursal {
 
         agrgarOyentes();
         consultarSucursales();
-//        llenarComboBox();
+        txtEstatusSucursal.setDisable(true);
         txtIdSucursal.setVisible(false);
         tableA.adapt(tblvSucursales);
 

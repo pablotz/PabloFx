@@ -172,7 +172,7 @@ public class TaskSalaInsert extends Task<Void> {
         try {
             if (jso.has("result")) {
                 if (jso.get("result").getAsString().toLowerCase().equals("exito")) {
-                    app.showAlert("Movimiento realizado", "Se elimino el registro correctamente", Alert.AlertType.INFORMATION);
+                    app.showAlert("Movimiento realizado", "Se añadio el registro correctamente", Alert.AlertType.INFORMATION);
                     panelSala.consultarSala();
                 } else {
                     app.showAlert("Error", jso.get("result").getAsString(), Alert.AlertType.WARNING);

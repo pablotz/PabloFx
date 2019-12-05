@@ -99,42 +99,26 @@ public class TaskSalaUpdate extends Task<Void>
      * 
      * Así mismo, este método ya corre sobre el hilo de JavaFX.
      */
-    @Override
-    public void succeeded()
-    {                
-        if (jso != null && jso.has("exception"))
-        {            
-            System.out.println(jso.get("exception").getAsString());
-            app.showAlert("Error", 
-                          jso.get("exception").getAsString(), 
-                          Alert.AlertType.ERROR);
-            return;
+   @Override
+    public void succeeded() {
+        try {
+            if (jso.has("result")) {
+                if (jso.get("result").getAsString().toLowerCase().equals("exito")) {
+                    app.showAlert("Movimiento realizado", "Se actualizo el registro correctamente", Alert.AlertType.INFORMATION);
+                    panelSala.consultarSala();
+                } else {
+                    app.showAlert("Error", jso.get("result").getAsString(), Alert.AlertType.WARNING);
+                }
+
+            } else {
+                app.showAlert("Error", "Error desconocido", Alert.AlertType.ERROR);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            app.showAlert("Excepcion", e.toString(), Alert.AlertType.ERROR);
         }
-        
-        if (jso != null && jso.has("error"))
-        {       
-            System.out.println(jso.get("error").getAsString());
-            app.showAlert("Error", 
-                          jso.get("error").getAsString(), 
-                          Alert.AlertType.ERROR);
-            return;
-        }
-        
-        if (resultException != null)
-        {
-            resultException.printStackTrace();
-            System.out.println("Exception Managed");           
-            app.showAlert("Error", 
-                          resultException.toString(), 
-                          Alert.AlertType.ERROR);
-            return;
-        }
-        
-        app.showAlert("Movimiento realizado.", 
-                      "Sucursal actualizada de forma correcta",
-                      Alert.AlertType.INFORMATION);
-        panelSala.consultarSala();
     }
+
     
     private String buildPOSTParams() throws Exception
     {        

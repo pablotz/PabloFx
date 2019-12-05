@@ -67,7 +67,7 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <JFXButton id="buttonModificar" fx:id="btnModificarSala" layoutX="909.0" layoutY="167.0" prefHeight="31.0" prefWidth="107.0" text="Modificar" textFill="WHITE">
+                              <JFXButton id="buttonModificar" fx:id="btnModificarSala" layoutX="910.0" layoutY="187.0" prefHeight="31.0" prefWidth="107.0" text="Modificar" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -89,6 +89,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </JFXTextField>
+                              <JFXButton id="buttonModificar" fx:id="btnLimpiar" layoutX="910.0" layoutY="127.0" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #00ceff;" text="Limipar Campos" textFill="WHITE" />
                                     </children>
                                 </AnchorPane>
                         <Label layoutX="176.0" layoutY="62.0" prefHeight="47.0" prefWidth="68.0" text="Foto">

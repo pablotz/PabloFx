@@ -9,7 +9,22 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -20,20 +35,29 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
+import org.glassware.generacionNumero.GeneracionNumero;
 import org.glassware.model.Empleado;
 import org.glassware.model.Persona;
 import org.glassware.model.Usuario;
 import org.glassware.gui.components.TableAdapterEmpleado;
+import org.glassware.task.empleado.TaskEmpleadoBuscar;
 import org.glassware.task.empleado.TaskEmpleadoDelete;
 import org.glassware.task.empleado.TaskEmpleadoGetAll;
 import org.glassware.task.empleado.TaskEmpleadoInsert;
 import org.glassware.task.empleado.TaskEmpleadoUpdate;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 /**
  *
  * @author ximena Uribe
  */
 public class PanelEmpleado {
+
+    List<Empleado> empleados;
+    
+    File imagenEmpleado;
 
     @FXML
     JFXButton btnCerrarModulo;
@@ -63,10 +87,10 @@ public class PanelEmpleado {
     public FXMLLoader getFxmll() {
         return fxmll;
     }
-    
+
     @FXML
     private JFXTabPane allTabPane;
-    
+
     @FXML
     private Tab tabEmpleados;
 
@@ -87,6 +111,9 @@ public class PanelEmpleado {
 
     @FXML
     private JFXButton btnAñadirFoto;
+
+    @FXML
+    private JFXButton btnLimpiar;
 
     @FXML
     private JFXButton btnRegistrarEmpleado;
@@ -151,7 +178,7 @@ public class PanelEmpleado {
     public JFXTabPane getAllTabPane() {
         return allTabPane;
     }
-    
+
     public Tab getTabEmpleados() {
         return tabEmpleados;
     }
@@ -244,10 +271,6 @@ public class PanelEmpleado {
         return txtNumEmpleado;
     }
 
-    public JFXTextField getTxtEstatusEmpleado() {
-        return txtEstatusEmpleado;
-    }
-
     public TableAdapterEmpleado getTableE() {
         return tableE;
     }
@@ -264,6 +287,12 @@ public class PanelEmpleado {
         return txtIdUsuario;
     }
 
+    public JFXButton getBtnLimpiar() {
+        return btnLimpiar;
+    }
+    
+    
+
     public void consultarEmpleados() {
         Thread hilo = null;
         TaskEmpleadoGetAll task = new TaskEmpleadoGetAll(app, this);
@@ -272,7 +301,40 @@ public class PanelEmpleado {
         hilo.start();
     }
 
-    public void addEmpleado() {
+    public void setEmpleados(List<Empleado> lista) {
+        empleados = lista;
+    }
+
+    public void setImagenEmpleado(File imagenEmpleado) {
+        this.imagenEmpleado = imagenEmpleado;
+    }
+
+    public void buscarEmpleados() {
+        List<Empleado> em = empleados;
+
+        ArrayList<Empleado> empleadoList = new ArrayList<>();
+
+        tblvEmpleados.getItems().clear();
+
+        for (int i = 0; i < em.size(); i++) {
+            if (em.get(i).getPersona().getNombre().equals(txtBuscarEmpleado.getText())) {
+                empleadoList.add(em.get(i));
+            }
+        }
+
+        tblvEmpleados.setItems(FXCollections.observableArrayList(empleadoList));
+
+    }
+
+    public void listaEmpleados() {
+        Thread hilo = null;
+        TaskEmpleadoBuscar task2 = new TaskEmpleadoBuscar(app, this);
+
+        hilo = new Thread(task2);
+        hilo.start();
+    }
+
+    public void addEmpleado() throws IOException {
         String error = validarDatos();
         if (error != null) {
             app.showAlert(error, error, Alert.AlertType.WARNING);
@@ -300,18 +362,19 @@ public class PanelEmpleado {
 
         p.setDomicilio(txtDomicilioEmpleado.getText());
         p.setTelefono(txtTelefonoEmpleado.getText());
-        System.out.println(txtTelefonoEmpleado.getText());
-        System.out.println(p.getTelefono());
         p.setRfc(txtRFCEmpleado.getText());
 
         us.setNombreUsuario(txtNombreUsuarioEmpleado.getText());
         us.setContrasenia(txtContraseniaEmpleado.getText());
         us.setRol(txtRolEmpleado.getText());
 
-        em.setNumeroEmpleado("QULP000");
+        GeneracionNumero numEm = new GeneracionNumero();
+
+        em.setNumeroEmpleado(numEm.numeroEmpleado(txtRFCEmpleado.getText()));
         em.setPuesto(txtPuestoEmpleado.getText());
-        em.setFoto("FOTO");
-        em.setRutaFoto("FOTO");
+        
+        em.setFoto(encodeToString(imagenEmpleado));
+        em.setRutaFoto(imagenEmpleado.getAbsolutePath());
 
         em.setPersona(p);
         em.setUsuario(us);
@@ -449,8 +512,53 @@ public class PanelEmpleado {
         cmbGeneroEmpleado.getItems().addAll("Hombre", "Mujer", "Otro");
     }
 
+    public static String encodeToString(File imgFile) throws IOException {
+        String imageString = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        BufferedImage imagen = ImageIO.read(imgFile);
+
+        try {
+            ImageIO.write(imagen, "png", bos);
+            byte[] imageBytes = bos.toByteArray();
+
+            BASE64Encoder encoder = new BASE64Encoder();
+            imageString = encoder.encode(imageBytes);
+
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(imageString);
+        return imageString;
+    }
+
+    public static Image decodeToImage(String imageString) {
+        Image imagen = null;
+        BufferedImage image = null;
+        
+        byte[] imageByte;
+        try {
+            BASE64Decoder decoder = new BASE64Decoder();
+            imageByte = decoder.decodeBuffer(imageString);
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+            image = ImageIO.read(bis);
+            bis.close();
+
+            File outputfile = new File("image.png");
+            ImageIO.write(image, "png", outputfile);
+            
+            image = ImageIO.read(outputfile);
+            
+            imagen = new Image(outputfile.toURI().toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return imagen;
+    }
+
     public void agregarFoto() {
-        btnAñadirFoto.setOnAction(event -> {
+            File imgFile = null;
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Buscar Imagen");
 
@@ -463,14 +571,15 @@ public class PanelEmpleado {
 
             Stage window = new Stage();
             // Obtener la imagen seleccionada
-            File imgFile = fileChooser.showOpenDialog(window);
+            imgFile = fileChooser.showOpenDialog(window);
 
             // Mostar la imagen
             if (imgFile != null) {
                 Image image = new Image("file:" + imgFile.getAbsolutePath());
+
                 imgvFotoEmpleado.setImage(image);
             }
-        });
+            setImagenEmpleado(imgFile);
     }
 
     public void limpiarCampos() {
@@ -490,6 +599,8 @@ public class PanelEmpleado {
         txtIdPersona.setText("");
         txtIdUsuario.setText("");
         txtIdEmpleado.setText("");
+        Image img = null;
+        imgvFotoEmpleado.setImage(img);
     }
 
     public void mostrarDetalleEmpleado() {
@@ -519,21 +630,22 @@ public class PanelEmpleado {
             txtRolEmpleado.setText("" + e.getUsuario().getRol());
             txtPuestoEmpleado.setText("" + e.getPuesto());
             txtNumEmpleado.setText("" + e.getNumeroEmpleado());
-            txtEstatusEmpleado.setText("" + e.getEstatus());
             txtIdEmpleado.setText("" + e.getIdEmpleado());
             txtIdPersona.setText("" + e.getPersona().getIdPersona());
             txtIdUsuario.setText("" + e.getUsuario().getIdUsuario());
+
+            imgvFotoEmpleado.setImage(decodeToImage(e.getFoto()));
             if (e.getEstatus() == 1) {
-                txtEstatusEmpleado.setText("Activa");
+                txtEstatusEmpleado.setText("Activo");
             } else {
-                txtEstatusEmpleado.setText("Inactiva");
+                txtEstatusEmpleado.setText("Inactivo");
             }
         }
     }
 
     public void seleccionarEmpleado() {
         tblvEmpleados.getSelectionModel().selectedItemProperty().addListener(evt -> {
-            allTabPane.getSelectionModel().select(tabMasterDetails );
+            allTabPane.getSelectionModel().select(tabMasterDetails);
             mostrarDetalleEmpleado();
         });
     }
@@ -584,9 +696,8 @@ public class PanelEmpleado {
 
         noVisisbleLabel();
 
-        agregarFoto();
-
         consultarEmpleados();
+        listaEmpleados();
         tableE.adapt(tblvEmpleados);
 
         seleccionarEmpleado();
@@ -596,6 +707,20 @@ public class PanelEmpleado {
     }
 
     public void agregarOyentes() {
+        
+        btnAñadirFoto.setOnAction(evt -> {
+            agregarFoto();
+        });
+        
+        btnBuscarEmpleado.setOnAction(evt -> {
+            if (txtBuscarEmpleado.getText().equals("")) {
+                consultarEmpleados();
+            } else {
+                buscarEmpleados();
+
+            }
+        });
+
         btnModificarEmpleado.setOnAction(evt -> {
             desblockTxTLabel();
         });
@@ -605,7 +730,11 @@ public class PanelEmpleado {
         });
 
         btnRegistrarEmpleado.setOnAction(evt -> {
-            addEmpleado();
+            try {
+                addEmpleado();
+            } catch (IOException ex) {
+                Logger.getLogger(PanelEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
         btnGuardarEmpleado.setOnAction(evt -> {
@@ -615,6 +744,10 @@ public class PanelEmpleado {
 
         btnCerrarModulo.setOnAction(evt -> {
             app.cerrarModulo();
+        });
+
+        btnLimpiar.setOnAction(evt -> {
+            limpiarCampos();
         });
     }
 

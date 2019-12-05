@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
 import org.glassware.commons.MySPACommons;
@@ -29,7 +30,7 @@ import org.glassware.model.Empleado;
  *
  * @author LiveGrios
  */
-public class TaskEmpleadoGetAll extends Task<Void> {
+public class TaskEmpleadoBuscar extends Task<Void> {
 
     // El Panel que contiene todos los controles visuales
     // que manipulan el catálogo y los datos de las empleados:
@@ -43,12 +44,15 @@ public class TaskEmpleadoGetAll extends Task<Void> {
 
     // La lista dinámica que contendrá objetos de tipo Sucursal:
     List<Empleado> empleados;
+    
+    List<Empleado> listaEmpleados;
+    
 
     // Guardamos la excepción, si es que ocurre una,
     // durante la ejecución paralela de la tarea:
     Exception resultException;
 
-    public TaskEmpleadoGetAll(WindowMain app, PanelEmpleado panelEmpleado) {
+    public TaskEmpleadoBuscar(WindowMain app, PanelEmpleado panelEmpleado) {
         this.app = app;
         this.panelEmpleado = panelEmpleado;
     }
@@ -77,6 +81,7 @@ public class TaskEmpleadoGetAll extends Task<Void> {
  empleados como un JSON array que posteriormente será convertido en una
  List<Sucursal> de Java.
      *
+     * @return 
      * @throws Exception
      */
     private void getAll() throws Exception {
@@ -131,9 +136,9 @@ public class TaskEmpleadoGetAll extends Task<Void> {
             // dentro del hilo de JavaFX, porque de no hacerlo allí, se generará
             // una excepción:
             Platform.runLater(() -> {
-                
-                panelEmpleado.getTblvEmpleados().setItems(FXCollections.observableArrayList(empleados));
+                panelEmpleado.setEmpleados(empleados);
             });
+            
         } else // Si hubo un error, nos desconectamos del servidor y 
         // mostramos el mensaje correspondiente dentro del hilo
         // de JavaFX:            
@@ -146,7 +151,6 @@ public class TaskEmpleadoGetAll extends Task<Void> {
                         Alert.AlertType.NONE);
             });
         }
-
     }
 
     /**
