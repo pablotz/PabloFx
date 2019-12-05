@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
 import org.glassware.commons.MySPACommons;
@@ -29,7 +30,7 @@ import org.glassware.model.Empleado;
  *
  * @author LiveGrios
  */
-public class TaskEmpleadoGetAllBuscar extends Task<Void> {
+public class TaskEmpleadoBuscar extends Task<Void> {
 
     // El Panel que contiene todos los controles visuales
     // que manipulan el catálogo y los datos de las empleados:
@@ -46,16 +47,14 @@ public class TaskEmpleadoGetAllBuscar extends Task<Void> {
     
     List<Empleado> listaEmpleados;
     
-    String nombre;
 
     // Guardamos la excepción, si es que ocurre una,
     // durante la ejecución paralela de la tarea:
     Exception resultException;
 
-    public TaskEmpleadoGetAllBuscar(WindowMain app, PanelEmpleado panelEmpleado, String nombre) {
+    public TaskEmpleadoBuscar(WindowMain app, PanelEmpleado panelEmpleado) {
         this.app = app;
         this.panelEmpleado = panelEmpleado;
-        this.nombre = nombre;
     }
 
     /**
@@ -82,9 +81,10 @@ public class TaskEmpleadoGetAllBuscar extends Task<Void> {
  empleados como un JSON array que posteriormente será convertido en una
  List<Sucursal> de Java.
      *
+     * @return 
      * @throws Exception
      */
-    public void getAll() throws Exception {
+    private void getAll() throws Exception {
         // Establecemos la ruta del servicio REST:
         String server = MySPACommons.URL_SERVER + "/api/Empleado/mostrar";
 
@@ -136,14 +136,7 @@ public class TaskEmpleadoGetAllBuscar extends Task<Void> {
             // dentro del hilo de JavaFX, porque de no hacerlo allí, se generará
             // una excepción:
             Platform.runLater(() -> {
-                
-                for (Empleado empleado : empleados) {
-                    if(empleado.getPersona().getNombre().equals(nombre)){
-                        listaEmpleados.add(empleado);
-                    }
-                }
-                
-                panelEmpleado.getTblvEmpleados().setItems(FXCollections.observableArrayList(listaEmpleados));
+                panelEmpleado.setEmpleados(empleados);
             });
             
         } else // Si hubo un error, nos desconectamos del servidor y 
@@ -158,7 +151,6 @@ public class TaskEmpleadoGetAllBuscar extends Task<Void> {
                         Alert.AlertType.NONE);
             });
         }
-        
     }
 
     /**

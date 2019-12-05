@@ -131,6 +131,7 @@ public class TaskEmpleadoGetAll extends Task<Void> {
             // dentro del hilo de JavaFX, porque de no hacerlo allí, se generará
             // una excepción:
             Platform.runLater(() -> {
+                
                 panelEmpleado.getTblvEmpleados().setItems(FXCollections.observableArrayList(empleados));
             });
         } else // Si hubo un error, nos desconectamos del servidor y 

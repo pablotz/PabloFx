@@ -10,6 +10,16 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,9 +35,9 @@ import org.glassware.model.Empleado;
 import org.glassware.model.Persona;
 import org.glassware.model.Usuario;
 import org.glassware.gui.components.TableAdapterEmpleado;
+import org.glassware.task.empleado.TaskEmpleadoBuscar;
 import org.glassware.task.empleado.TaskEmpleadoDelete;
 import org.glassware.task.empleado.TaskEmpleadoGetAll;
-import org.glassware.task.empleado.TaskEmpleadoGetAllBuscar;
 import org.glassware.task.empleado.TaskEmpleadoInsert;
 import org.glassware.task.empleado.TaskEmpleadoUpdate;
 
@@ -36,6 +46,8 @@ import org.glassware.task.empleado.TaskEmpleadoUpdate;
  * @author ximena Uribe
  */
 public class PanelEmpleado {
+
+    List<Empleado> empleados;
 
     @FXML
     JFXButton btnCerrarModulo;
@@ -65,10 +77,10 @@ public class PanelEmpleado {
     public FXMLLoader getFxmll() {
         return fxmll;
     }
-    
+
     @FXML
     private JFXTabPane allTabPane;
-    
+
     @FXML
     private Tab tabEmpleados;
 
@@ -89,7 +101,7 @@ public class PanelEmpleado {
 
     @FXML
     private JFXButton btnAñadirFoto;
-    
+
     @FXML
     private JFXButton btnLimpiar;
 
@@ -156,7 +168,7 @@ public class PanelEmpleado {
     public JFXTabPane getAllTabPane() {
         return allTabPane;
     }
-    
+
     public Tab getTabEmpleados() {
         return tabEmpleados;
     }
@@ -249,7 +261,6 @@ public class PanelEmpleado {
         return txtNumEmpleado;
     }
 
-
     public TableAdapterEmpleado getTableE() {
         return tableE;
     }
@@ -269,8 +280,6 @@ public class PanelEmpleado {
     public JFXButton getBtnLimpiar() {
         return btnLimpiar;
     }
-    
-    
 
     public void consultarEmpleados() {
         Thread hilo = null;
@@ -279,10 +288,31 @@ public class PanelEmpleado {
         hilo = new Thread(task);
         hilo.start();
     }
-    
+
+    public void setEmpleados(List<Empleado> lista) {
+        empleados = lista;
+    }
+
     public void buscarEmpleados() {
+        List<Empleado> em = empleados;
+
+        ArrayList<Empleado> empleadoList = new ArrayList<>();
+
+        tblvEmpleados.getItems().clear();
+
+        for (int i = 0; i < em.size(); i++) {
+            if (em.get(i).getPersona().getNombre().equals(txtBuscarEmpleado.getText())) {
+                empleadoList.add(em.get(i));
+            }
+        }
+
+        tblvEmpleados.setItems(FXCollections.observableArrayList(empleadoList));
+
+    }
+
+    public void listaEmpleados() {
         Thread hilo = null;
-        TaskEmpleadoGetAllBuscar task2 = new TaskEmpleadoGetAllBuscar(app, this, txtBuscarEmpleado.getText());
+        TaskEmpleadoBuscar task2 = new TaskEmpleadoBuscar(app, this);
 
         hilo = new Thread(task2);
         hilo.start();
@@ -325,7 +355,7 @@ public class PanelEmpleado {
         us.setRol(txtRolEmpleado.getText());
 
         GeneracionNumero numEm = new GeneracionNumero();
-        
+
         em.setNumeroEmpleado(numEm.numeroEmpleado(txtRFCEmpleado.getText()));
         em.setPuesto(txtPuestoEmpleado.getText());
         em.setFoto(" ");
@@ -467,6 +497,16 @@ public class PanelEmpleado {
         cmbGeneroEmpleado.getItems().addAll("Hombre", "Mujer", "Otro");
     }
 
+//    private static String encodeFileToBase64Binary(File file) throws FileNotFoundException, IOException {
+//        String encodedfile = null;
+//        FileInputStream fileInputStreamReader = new FileInputStream(file); // TODO Auto-generated catch block
+//        // TODO Auto-generated catch block
+//        byte[] bytes = new byte[(int) file.length()];
+//        fileInputStreamReader.read(bytes);
+//        encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+//        return encodedfile;
+//    }
+
     public void agregarFoto() {
         btnAñadirFoto.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
@@ -554,7 +594,6 @@ public class PanelEmpleado {
             mostrarDetalleEmpleado();
         });
     }
-    
 
     public void blockTxTLabel() {
         txtNombreEmpleado.setDisable(true);
@@ -605,6 +644,7 @@ public class PanelEmpleado {
         agregarFoto();
 
         consultarEmpleados();
+        listaEmpleados();
         tableE.adapt(tblvEmpleados);
 
         seleccionarEmpleado();
@@ -614,11 +654,16 @@ public class PanelEmpleado {
     }
 
     public void agregarOyentes() {
-        
+
         btnBuscarEmpleado.setOnAction(evt -> {
-            buscarEmpleados();
+            if (txtBuscarEmpleado.getText().equals("")) {
+                consultarEmpleados();
+            } else {
+                buscarEmpleados();
+
+            }
         });
-        
+
         btnModificarEmpleado.setOnAction(evt -> {
             desblockTxTLabel();
         });
@@ -639,7 +684,7 @@ public class PanelEmpleado {
         btnCerrarModulo.setOnAction(evt -> {
             app.cerrarModulo();
         });
-        
+
         btnLimpiar.setOnAction(evt -> {
             limpiarCampos();
         });
