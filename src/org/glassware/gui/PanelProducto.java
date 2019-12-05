@@ -6,11 +6,13 @@
 package org.glassware.gui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import org.glassware.model.Producto;
@@ -65,6 +67,29 @@ public class PanelProducto {
 
     @FXML
     private JFXTextField txtEstatus;
+    
+    @FXML
+    private JFXButton btnLimpiar;
+    
+    @FXML
+    private Tab tabDetalle;
+    
+    @FXML
+    private Tab tabTabla;
+    
+    @FXML
+    private JFXTabPane allTabPane;
+    
+    @FXML
+    private JFXButton btnRegistrar;
+
+    public JFXButton getBtnRegistrar() {
+        return btnRegistrar;
+    }
+
+    public JFXButton getBtnLimpiar() {
+        return btnLimpiar;
+    }
 
     public JFXTextField getTxtEstatus() {
         return txtEstatus;
@@ -122,6 +147,20 @@ public class PanelProducto {
         return txtIdProducto;
     }
 
+    public Tab getTabDetalle() {
+        return tabDetalle;
+    }
+
+    public Tab getTabTabla() {
+        return tabTabla;
+    }
+
+    public JFXTabPane getAllTabPane() {
+        return allTabPane;
+    }
+    
+    
+
     WindowMain app;
 
     FXMLLoader fxmll;
@@ -144,12 +183,20 @@ public class PanelProducto {
     public void buscarProductos() {
         Producto pr = new Producto();
         pr.setNombre(txtBuscarProducto.getText());
-
-        Thread hilo = null;
+        if(pr.getNombre().equals(" ")){
+            consultarProductos();
+             
+        }else{
+            Thread hilo = null;
         TaskProductoSearch task = new TaskProductoSearch(app, this, pr);
 
         hilo = new Thread(task);
         hilo.start();
+            
+            
+        }
+
+       
     }
 
     public void insertarProducto() {
@@ -185,7 +232,12 @@ public class PanelProducto {
         }
         return error;
     }
-
+    public void seleccionarProducto(){
+        tblvProductos.getSelectionModel().selectedItemProperty().addListener(evt -> {
+        allTabPane.getSelectionModel().select(tabDetalle);
+        mostrarDetalleProducto();
+    });
+    }
     public void mostrarDetalleProducto() {
         Producto p = tblvProductos.getSelectionModel().getSelectedItem();
         if (p == null) {
@@ -200,6 +252,7 @@ public class PanelProducto {
 
             if (p.getEstatus() == 1) {
                 txtEstatus.setText("Activa");
+                txtEstatus.setVisible(false);
             } else {
                 txtEstatus.setText("Inactiva");
             }
@@ -252,12 +305,25 @@ public class PanelProducto {
         hilo.start();
 
     }
+    public void bloquear (){
+        txtNombreProducto.setDisable(true);
+        txtMarcaProducto.setDisable(true);
+        txtPrecio.setDisable(true);
+    }
+    public void desbloquear(){
+         txtNombreProducto.setDisable(false);
+        txtMarcaProducto.setDisable(false);
+        txtPrecio.setDisable(false);
+        
+    }
 
     public void inicializar() throws Exception {
         fxmll = new FXMLLoader(System.class.getResource("/org/glassware/gui/fxml/panel_producto.fxml"));
         fxmll.setController(this);
         fxmll.load();
         agregarOyentes();
+        seleccionarProducto();
+        bloquear();
         btnCerrarModulo.setOnAction(evt -> {
             app.cerrarModulo();
         });
@@ -271,10 +337,13 @@ public class PanelProducto {
             mostrarDetalleProducto();
         });
         btnGuardarProducto.setOnAction(evt -> {
-            insertarProducto();
+             updateProducto();
         });
+        btnRegistrar.setOnAction(evt -> {
+              insertarProducto();});
+        
         btnModificarProducto.setOnAction(evt -> {
-            updateProducto();
+            desbloquear();
         });
         btnEliminarProducto.setOnAction(evt -> {
             deleteProducto();
@@ -282,6 +351,7 @@ public class PanelProducto {
         btnBuscarProducto.setOnAction(evt -> {
             buscarProductos();
         });
+        btnLimpiar.setOnAction(evt -> {limpiarCampos();});
     }
 
 }

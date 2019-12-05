@@ -44,8 +44,9 @@ public class TaskProductolGetAll extends Task<Void> {
     HttpURLConnection connHttp;
 
     // La lista dinámica que contendrá objetos de tipo Sucursal:
-    List<Producto> productos;
-
+     List<Producto> productos;
+    
+    
     // Guardamos la excepción, si es que ocurre una,
     // durante la ejecución paralela de la tarea:
     Exception resultException;
@@ -158,7 +159,7 @@ public class TaskProductolGetAll extends Task<Void> {
      * @return
      * @throws Exception
      */
-    private List<Producto> parseProductos(String strJson) throws Exception {
+    public List<Producto> parseProductos(String strJson) throws Exception {
         // Esta es la lista que contendrá los objetos de tipo Sucursal:
         List<Producto> productos = new ArrayList<Producto>();
 
@@ -177,3 +178,4 @@ public class TaskProductolGetAll extends Task<Void> {
         return productos;
     }
 }
+   
